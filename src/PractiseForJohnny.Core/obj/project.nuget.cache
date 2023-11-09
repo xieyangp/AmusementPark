@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "Rtn+M3wEHekOHRrl1uVFs4Nu9UAkLjZgu1Fz2X8IIY4KdyPxzUCLtXGrIAb/DFlKGNcTyEy6eD0dX5Dqf8eCNA==",
+  "success": true,
+  "projectFilePath": "/Users/johnny/RiderProjects/PractiseForJohnny/src/PractiseForJohnny.Core/PractiseForJohnny.Core.csproj",
+  "expectedPackageFiles": [
+    "/Users/johnny/.nuget/packages/microsoft.netcore.app.ref/6.0.20/microsoft.netcore.app.ref.6.0.20.nupkg.sha512",
+    "/Users/johnny/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.20/microsoft.aspnetcore.app.ref.6.0.20.nupkg.sha512"
+  ],
+  "logs": []
+}
