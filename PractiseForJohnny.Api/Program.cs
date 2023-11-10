@@ -1,8 +1,11 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Configuration;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using PractiseForJohnny.Core.IService;
+using PractiseForJohnny.Core.Service.HelloWorld;
+
 
 namespace PractiseForJohnny.Api;
+
 public class Program
 {
     public static void Main(string[] args)
@@ -11,11 +14,11 @@ public class Program
             .AddJsonFile("appsettings.json")
             .AddEnvironmentVariables()
             .Build();
-
-        CreateHostBuilder(args).Build().Run();
+     
     }
     
     public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
+            .UseServiceProviderFactory(new AutofacServiceProviderFactory())
             .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
 }
