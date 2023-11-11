@@ -1,6 +1,6 @@
 namespace PractiseForJohnny.Core.IService;
 
-public interface IHelloWordService : IScopedService
+public interface IHelloWordService 
 {
     public string SayHello();
 }
