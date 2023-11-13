@@ -9,13 +9,11 @@ namespace PractiseForJohnny.Core.Service;
 public class PractiseForJohnnyModule : Module
 {
     private readonly Assembly[] _assemblies;
-    
     private readonly IConfiguration _configuration;
 
     public PractiseForJohnnyModule(IConfiguration configuration, params Assembly[] assemblies)
     {
         _assemblies = assemblies;
-        
         _configuration = configuration;
     }
     
@@ -40,27 +38,10 @@ public class PractiseForJohnnyModule : Module
                 case var t when typeof(ITransientDependency).IsAssignableFrom(type):
                     builder.RegisterType(t).AsImplementedInterfaces().InstancePerDependency();
                     break;
-                default:
+                default:           
                     builder.RegisterType(type).AsImplementedInterfaces();
                     break;
             }
-            
-            /*if (typeof(IScopedDependency).IsAssignableFrom(type))
-            {
-                builder.RegisterType(type).AsImplementedInterfaces().InstancePerLifetimeScope();
-            }
-            else if (typeof(ISingletonService).IsAssignableFrom(type))
-            {
-                builder.RegisterType(type).AsImplementedInterfaces().SingleInstance();
-            }
-            else if (typeof(ITransientDependency).IsAssignableFrom(type))
-            {
-                builder.RegisterType(type).AsImplementedInterfaces().InstancePerDependency();
-            }
-            else
-            {
-                builder.RegisterType(type).AsImplementedInterfaces();
-            }*/
         }
     }
 }
