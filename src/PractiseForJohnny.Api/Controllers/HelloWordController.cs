@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using PractiseForJohnny.Core.IService;
-namespace PractiseForLizzie.Api.Controllers;
+
+namespace PractiseForJohnny.Api.Controllers;
+
 [ApiController]
 [Route("api/[controller]/[action]")]
 public class HelloWordController : Controller
@@ -11,10 +13,10 @@ public class HelloWordController : Controller
     {
         _helloWordService = helloWordService;
     }
+    
     [HttpGet]
     public IActionResult Index()
     {
         return Ok(_helloWordService.SayHello());
     }
- 
 }
