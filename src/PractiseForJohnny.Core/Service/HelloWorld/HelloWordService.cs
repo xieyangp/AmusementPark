@@ -3,7 +3,7 @@ using PractiseForJohnny.Core.IService.IHelloWord;
 
 namespace PractiseForJohnny.Core.Service.HelloWorld;
 
-public class HelloWordService:IHelloWordService
+public class HelloWordService : IHelloWordService
 {
     public string SayHello()
     {
