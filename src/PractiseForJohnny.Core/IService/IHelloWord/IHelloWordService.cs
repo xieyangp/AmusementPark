@@ -1,8 +1,6 @@
-using Microsoft.Extensions.DependencyInjection;
+namespace PractiseForJohnny.Core.IService.IHelloWord;
 
-namespace PractiseForJohnny.Core.IService;
-
-public interface IHelloWordService : IInstancePerLifetimeScope
+public interface IHelloWordService : IScopedDependency
 {
     public string SayHello();
 }

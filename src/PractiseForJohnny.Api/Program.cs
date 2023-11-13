@@ -1,6 +1,6 @@
 using Autofac.Extensions.DependencyInjection;
 
-namespace PractiseForLizzie.Api;
+namespace PractiseForJohnny.Api;
 
 public class Program
 {

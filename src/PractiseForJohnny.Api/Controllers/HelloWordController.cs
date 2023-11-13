@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using PractiseForJohnny.Core.IService;
+using PractiseForJohnny.Core.IService.IHelloWord;
 
 namespace PractiseForJohnny.Api.Controllers;
 
 [ApiController]
-[Route("api/[controller]/[action]")]
+[Route("api/[action]")]
 public class HelloWordController : Controller
 {
     private readonly IHelloWordService _helloWordService;
@@ -15,7 +16,7 @@ public class HelloWordController : Controller
     }
     
     [HttpGet]
-    public IActionResult Index()
+    public IActionResult Hello()
     {
         return Ok(_helloWordService.SayHello());
     }
