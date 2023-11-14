@@ -1,4 +1,4 @@
-namespace PractiseForJohnny.Core.IService.IHelloWord;
+namespace PractiseForJohnny.Core.Service;
 
 public interface IHelloWordService : IScopedDependency
 {

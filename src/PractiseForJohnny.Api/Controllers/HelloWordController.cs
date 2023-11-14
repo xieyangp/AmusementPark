@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using PractiseForJohnny.Core.IService.IHelloWord;
+using PractiseForJohnny.Core.Service;
 
 namespace PractiseForJohnny.Api.Controllers;
 

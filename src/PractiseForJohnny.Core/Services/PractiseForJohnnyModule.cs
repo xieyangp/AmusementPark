@@ -1,7 +1,9 @@
 using System.Reflection;
 using Autofac;
+using Mediator.Net;
+using Mediator.Net.Autofac;
 using Microsoft.Extensions.Configuration;
-using PractiseForJohnny.Core.IService;
+using Mediator = Mediator.Net.Mediator;
 using Module = Autofac.Module;
 
 namespace PractiseForJohnny.Core.Service;
@@ -19,13 +21,15 @@ public class PractiseForJohnnyModule : Module
     
     protected override void Load(ContainerBuilder builder)
     {
+        RegisterMediator(builder);
+        
         RegisterDependency(builder);
     }
     
     private void RegisterDependency(ContainerBuilder builder)
     {
-        foreach (var type in typeof(IService.IService).Assembly.GetTypes()
-            .Where(t => typeof(IService.IService).IsAssignableFrom(t) && t.IsClass))
+        foreach (var type in typeof(IService).Assembly.GetTypes()
+            .Where(t => typeof(IService).IsAssignableFrom(t) && t.IsClass))
         {
             switch (type)
             {
@@ -43,5 +47,14 @@ public class PractiseForJohnnyModule : Module
                     break;
             }
         }
+    }
+
+    private void RegisterMediator(ContainerBuilder builder)
+    {
+        var mediatorBuidler = new MediatorBuilder();
+
+        mediatorBuidler.RegisterHandlers(_assemblies);
+
+        builder.RegisterMediator(mediatorBuidler);
     }
 }

@@ -9,11 +9,21 @@
     <ItemGroup>
       <PackageReference Include="Autofac" Version="7.1.0" />
       <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
+      <PackageReference Include="Mediator.Net" Version="4.8.0" />
+      <PackageReference Include="Mediator.Net.Autofac" Version="4.8.0" />
       <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     </ItemGroup>
 
     <ItemGroup>
       <Compile Remove="PractiseForJohnnyModule.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Handler\RequestHandler\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\PractiseForJohnny.Message\PractiseForJohnny.Message.csproj" />
     </ItemGroup>
 
 </Project>
