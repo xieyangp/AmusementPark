@@ -2,7 +2,6 @@ namespace PractiseForJohnny.Core.Service;
 
 public interface IService
 {
-
 }
 
 /// <summary>
