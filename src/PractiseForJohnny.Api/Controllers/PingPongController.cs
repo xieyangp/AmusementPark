@@ -7,7 +7,7 @@ namespace PractiseForJohnny.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class PingPongController : Controller
+public class PingPongController : ControllerBase
 {
    private readonly IMediator _mediator;
 

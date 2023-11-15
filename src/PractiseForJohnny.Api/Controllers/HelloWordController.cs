@@ -5,7 +5,7 @@ namespace PractiseForJohnny.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class HelloWordController : Controller
+public class HelloWordController : ControllerBase
 {
     private readonly IHelloWordService _helloWordService;
 
