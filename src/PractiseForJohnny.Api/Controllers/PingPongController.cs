@@ -1,12 +1,12 @@
 using Mediator.Net;
 using Microsoft.AspNetCore.Mvc;
 using PractiseForJohnny.Message.Commands;
-using PractiseForJohnny.Message.Request;
+using PractiseForJohnny.Message.Requests;
 
 namespace PractiseForJohnny.Api.Controllers;
 
 [ApiController]
-[Route("api/pingpong")]
+[Route("api/[Controller]")]
 public class PingPongController : Controller
 {
    private readonly IMediator _mediator;
@@ -17,7 +17,6 @@ public class PingPongController : Controller
    }
 
    [HttpPost]
-   [Route("create")]
    public async Task<IActionResult> CreatePingAsync([FromBody] PingCommand command)
    {
       var response = await _mediator.SendAsync<PingCommand, PongResponse>(command).ConfigureAwait(false);

@@ -15,18 +15,15 @@ public class PingCommandHandler : ICommandHandler<PingCommand, PongResponse>
         _pingPongService = pingPongService;
     }
 
-    public Task<PongResponse> Handle(IReceiveContext<PingCommand> context, CancellationToken cancellationToken)
+    public async Task<PongResponse> Handle(IReceiveContext<PingCommand> context, CancellationToken cancellationToken)
     {
         var @event = _pingPongService.PingPong(context.Message, cancellationToken);
 
-        context.PublishAsync(@event).ConfigureAwait(false);
+        await context.PublishAsync(@event).ConfigureAwait(false);
 
-        return Task.Run(() =>
+        return new PongResponse
         {
-            var response = new PongResponse();
-            response.Message = @event.Message;
-
-            return response;
-        });
+            Message = @event.Message
+        };
     }
 }
