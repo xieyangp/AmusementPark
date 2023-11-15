@@ -19,7 +19,7 @@ public class PingCommandHandler : ICommandHandler<PingCommand, PongResponse>
     {
         var @event = _pingPongService.PingPong(context.Message, cancellationToken);
 
-        await context.PublishAsync(@event).ConfigureAwait(false);
+        await context.PublishAsync(@event, cancellationToken).ConfigureAwait(false);
 
         return new PongResponse
         {

@@ -6,7 +6,7 @@ using PractiseForJohnny.Message.Requests;
 namespace PractiseForJohnny.Api.Controllers;
 
 [ApiController]
-[Route("api/[Controller]")]
+[Route("api/[controller]")]
 public class PingPongController : Controller
 {
    private readonly IMediator _mediator;

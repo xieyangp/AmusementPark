@@ -4,7 +4,7 @@ using PractiseForJohnny.Core.Service;
 namespace PractiseForJohnny.Api.Controllers;
 
 [ApiController]
-[Route("api/[Controller]")]
+[Route("api/[controller]")]
 public class HelloWordController : Controller
 {
     private readonly IHelloWordService _helloWordService;
