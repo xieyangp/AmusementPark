@@ -1,4 +1,4 @@
-namespace PractiseForJohnny.Core.Service;
+namespace PractiseForJohnny.Core.Services;
 
 public interface IService
 {

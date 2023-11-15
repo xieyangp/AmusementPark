@@ -3,6 +3,7 @@ using Autofac;
 using Mediator.Net;
 using Mediator.Net.Autofac;
 using Microsoft.Extensions.Configuration;
+using PractiseForJohnny.Core.Services;
 using Mediator = Mediator.Net.Mediator;
 using Module = Autofac.Module;
 

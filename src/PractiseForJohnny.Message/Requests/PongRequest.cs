@@ -1,6 +1,6 @@
 using Mediator.Net.Contracts;
 
-namespace PractiseForJohnny.Message.Request;
+namespace PractiseForJohnny.Message.Requests;
 
 public class PongResponse : IResponse
 {

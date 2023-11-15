@@ -1,10 +1,9 @@
 using PractiseForJohnny.Message.Commands;
-using PractiseForJohnny.Message.Event;
-using PractiseForJohnny.Message.Request;
+using PractiseForJohnny.Message.Events;
 
-namespace PractiseForJohnny.Core.Service;
+namespace PractiseForJohnny.Core.Services;
 
 public interface IPingPongService : IScopedDependency
 {
-    public Task<PongEvent> PingPong(PingCommand command, CancellationToken cancellationToken);
+    PongEvent PingPong(PingCommand command, CancellationToken cancellationToken);
 }

@@ -1,13 +1,12 @@
 using PractiseForJohnny.Message.Commands;
-using PractiseForJohnny.Message.Event;
-using PractiseForJohnny.Message.Request;
+using PractiseForJohnny.Message.Events;
 
-namespace PractiseForJohnny.Core.Service;
+namespace PractiseForJohnny.Core.Services;
 
 public class PingPongService : IPingPongService
 {
-    public async Task<PongEvent> PingPong(PingCommand command, CancellationToken cancellationToken)
+    public PongEvent PingPong(PingCommand command, CancellationToken cancellationToken)
     {
-        return new PongEvent() { Message = "pong1" };
+        return new PongEvent { Message = "pong1" };
     }
 }

@@ -19,7 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Handler\RequestHandler\" />
+      <Folder Include="Handler\RequestHandlers\" />
     </ItemGroup>
 
     <ItemGroup>

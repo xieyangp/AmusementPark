@@ -1,6 +1,6 @@
 using Mediator.Net.Contracts;
 
-namespace PractiseForJohnny.Message.Event;
+namespace PractiseForJohnny.Message.Events;
 
 public class PongEvent : IEvent
 {

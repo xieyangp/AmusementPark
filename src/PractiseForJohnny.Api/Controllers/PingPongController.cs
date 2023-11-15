@@ -6,7 +6,7 @@ using PractiseForJohnny.Message.Request;
 namespace PractiseForJohnny.Api.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/pingpong")]
 public class PingPongController : Controller
 {
    private readonly IMediator _mediator;
@@ -17,10 +17,11 @@ public class PingPongController : Controller
    }
 
    [HttpPost]
-   public async Task<IActionResult> CreatePingAsync([FromBody]PingCommand input)
+   [Route("create")]
+   public async Task<IActionResult> CreatePingAsync([FromBody] PingCommand command)
    {
-      var response = await _mediator.SendAsync<PingCommand, PongResponse>(input).ConfigureAwait(false);
-      
+      var response = await _mediator.SendAsync<PingCommand, PongResponse>(command).ConfigureAwait(false);
+
       return Ok(response);
    }
 }
