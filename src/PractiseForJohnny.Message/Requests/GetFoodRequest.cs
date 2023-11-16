@@ -1,9 +1,9 @@
 using Mediator.Net.Contracts;
 using PractiseForJohnny.Message.DTO;
 
-namespace PractiseForJohnny.Message.Commands;
+namespace PractiseForJohnny.Message.Requests;
 
-public class GetFoodCommand : ICommand
+public class GetFoodRequest : IRequest
 {
     public GetFoodDto Food { get; set; }
 }

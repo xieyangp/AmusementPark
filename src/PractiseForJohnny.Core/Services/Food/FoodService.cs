@@ -4,6 +4,7 @@ using PractiseForJohnny.Core.Domain;
 using PractiseForJohnny.Message.Commands;
 using PractiseForJohnny.Message.DTO;
 using PractiseForJohnny.Message.Events;
+using PractiseForJohnny.Message.Requests;
 
 namespace PractiseForJohnny.Core.Services.Food;
 
@@ -72,10 +73,10 @@ public class FoodService : IFoodService
         };
     }
 
-    public async Task<GetFoodEvent> GetFoodAsync(GetFoodCommand command, CancellationToken cancellationToken)
+    public async Task<GetFoodEvent> GetFoodAsync(GetFoodRequest request, CancellationToken cancellationToken)
     {
-        var commandFood = command.Food;
-        var food = await _pratiseForJohnnyDbContext.FindAsync<Foods>(commandFood.Id);
+        var requestFood = request.Food;
+        var food = await _pratiseForJohnnyDbContext.FindAsync<Foods>(requestFood.Id);
 
         var result = new OutFoodDto()
         {

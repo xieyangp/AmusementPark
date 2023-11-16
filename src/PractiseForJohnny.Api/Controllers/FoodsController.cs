@@ -2,6 +2,7 @@ using Mediator.Net;
 using Microsoft.AspNetCore.Mvc;
 using PractiseForJohnny.Core.Data;
 using PractiseForJohnny.Message.Commands;
+using PractiseForJohnny.Message.Requests;
 
 namespace PractiseForJohnny.Api.Controllers;
 
@@ -11,14 +12,14 @@ public class FoodsController : ControllerBase
 {
     private readonly IMediator _mediator;
 
-    public FoodsController(PratiseForJohnnyDbContext pratiseForJohnnyDbContext, IMediator mediator)
+    public FoodsController(IMediator mediator)
     {
         _mediator = mediator;
     }
 
     [HttpPost]
     [Route("create")]
-    public async Task<IActionResult> CreateFood(CreateFoodCommand command)
+    public async Task<IActionResult> CreateFoodAsync([FromBody] CreateFoodCommand command)
     {
         var response = await _mediator.SendAsync<CreateFoodCommand, CreateFoodResponse>(command).ConfigureAwait(false);
 
@@ -27,16 +28,16 @@ public class FoodsController : ControllerBase
 
     [HttpPost]
     [Route("update")]
-    public async Task<IActionResult> UpdateFood(UpdateFoodCommand command)
+    public async Task<IActionResult> UpdateFoodAsync([FromBody] UpdateFoodCommand command)
     {
         var result = await _mediator.SendAsync<UpdateFoodCommand, UpdateFoodResponse>(command).ConfigureAwait(false);
 
         return Ok(result);
     }
 
-    [HttpDelete]
+    [HttpPost]
     [Route("delete")]
-    public async Task<IActionResult> DeleteFood(DeleteFoodCommand command)
+    public async Task<IActionResult> DeleteFoodAsync([FromBody] DeleteFoodCommand command)
     {
         var result = await _mediator.SendAsync<DeleteFoodCommand, DeleteFoodResponse>(command).ConfigureAwait(false);
 
@@ -45,9 +46,9 @@ public class FoodsController : ControllerBase
 
     [HttpPost]
     [Route("get")]
-    public async Task<IActionResult> GetFood(GetFoodCommand command)
+    public async Task<IActionResult> GetFoodAsync([FromBody] GetFoodRequest command)
     {
-        var result = await _mediator.SendAsync<GetFoodCommand, GetFoodResponse>(command).ConfigureAwait(false);
+        var result = await _mediator.RequestAsync<GetFoodRequest, GetFoodResponse>(command).ConfigureAwait(false);
 
         return Ok(result);
     }

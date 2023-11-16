@@ -21,10 +21,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Handler\RequestHandlers\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\PractiseForJohnny.Message\PractiseForJohnny.Message.csproj" />
     </ItemGroup>
 
