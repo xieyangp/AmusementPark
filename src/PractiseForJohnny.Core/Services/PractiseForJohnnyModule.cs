@@ -73,6 +73,7 @@ public class PractiseForJohnnyModule : Module
             .AsImplementedInterfaces()
             .InstancePerLifetimeScope();
     }
+    
     private void RegisterSettings(ContainerBuilder builder)
     {
         var settingTypes = typeof(PratiseForJohnnyDbContext).Assembly.GetTypes()

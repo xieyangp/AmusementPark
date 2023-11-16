@@ -7,16 +7,16 @@ namespace PractiseForJohnny.Core.Handler.CommandHandlers;
 
 public class UpdateFoodCommandHandler : ICommandHandler<UpdateFoodCommand, UpdateFoodResponse>
 {
-    private readonly IFoodsService _foodService;
+    private readonly IFoodsService _foodsService;
 
-    public UpdateFoodCommandHandler(IFoodsService foodService)
+    public UpdateFoodCommandHandler(IFoodsService foodsService)
     {
-        _foodService = foodService;
+        _foodsService = foodsService;
     }
 
     public async Task<UpdateFoodResponse> Handle(IReceiveContext<UpdateFoodCommand> context, CancellationToken cancellationToken)
     {
-        var @event = await _foodService.UpdateFoodAsync(context.Message, cancellationToken).ConfigureAwait(false);
+        var @event = await _foodsService.UpdateFoodAsync(context.Message, cancellationToken).ConfigureAwait(false);
 
         await context.PublishAsync(@event, cancellationToken).ConfigureAwait(false);
 
