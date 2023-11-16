@@ -2,9 +2,11 @@ using System.Reflection;
 using Autofac;
 using Mediator.Net;
 using Mediator.Net.Autofac;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using PractiseForJohnny.Core.Data;
 using PractiseForJohnny.Core.Services;
-using Mediator = Mediator.Net.Mediator;
+using PractiseForJohnny.Core.Setting;
 using Module = Autofac.Module;
 
 namespace PractiseForJohnny.Core.Service;
@@ -25,6 +27,10 @@ public class PractiseForJohnnyModule : Module
         RegisterMediator(builder);
         
         RegisterDependency(builder);
+        
+        RegisterDbContext(builder);
+
+        RegisterSettings(builder);
     }
     
     private void RegisterDependency(ContainerBuilder builder)
@@ -57,5 +63,22 @@ public class PractiseForJohnnyModule : Module
         mediatorBuidler.RegisterHandlers(_assemblies);
 
         builder.RegisterMediator(mediatorBuidler);
+    }
+    
+    private void RegisterDbContext(ContainerBuilder builder)
+    {
+        builder.RegisterType<PratiseForJohnnyDbContext>()
+            .AsSelf()
+            .As<DbContext>()
+            .AsImplementedInterfaces()
+            .InstancePerLifetimeScope();
+    }
+    private void RegisterSettings(ContainerBuilder builder)
+    {
+        var settingTypes = typeof(PratiseForJohnnyDbContext).Assembly.GetTypes()
+            .Where(t => t.IsClass && typeof(IConfiguartionSetting).IsAssignableFrom(t))
+            .ToArray();
+
+        builder.RegisterTypes(settingTypes).AsSelf().SingleInstance();
     }
 }

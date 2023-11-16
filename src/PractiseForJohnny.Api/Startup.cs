@@ -1,5 +1,7 @@
 using Autofac;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using PractiseForJohnny.Core.Data;
 using PractiseForJohnny.Core.Service;
 
 namespace PractiseForJohnny.Api;
@@ -12,11 +14,11 @@ public class Startup
     {
         Configuration = configuration;
     }
-    
+
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddMvc();
-        
+
         services.AddControllers();
         
         services.AddSwaggerGen(c =>
