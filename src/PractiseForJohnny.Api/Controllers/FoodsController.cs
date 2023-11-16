@@ -46,9 +46,9 @@ public class FoodsController : ControllerBase
 
     [HttpPost]
     [Route("get")]
-    public async Task<IActionResult> GetFoodAsync([FromBody] GetFoodRequest command)
+    public async Task<IActionResult> GetFoodAsync([FromBody] GetFoodRequest request)
     {
-        var result = await _mediator.RequestAsync<GetFoodRequest, GetFoodResponse>(command).ConfigureAwait(false);
+        var result = await _mediator.RequestAsync<GetFoodRequest, GetFoodResponse>(request).ConfigureAwait(false);
 
         return Ok(result);
     }
