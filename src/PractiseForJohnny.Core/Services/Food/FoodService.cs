@@ -7,7 +7,7 @@ using PractiseForJohnny.Message.Events;
 
 namespace PractiseForJohnny.Core.Services.Food;
 
-public class FoodService : IFoodsService
+public class FoodService : IFoodService
 {
     private readonly PratiseForJohnnyDbContext _pratiseForJohnnyDbContext;
 

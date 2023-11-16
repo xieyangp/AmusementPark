@@ -5,7 +5,7 @@ using PractiseForJohnny.Message.Events;
 
 namespace PractiseForJohnny.Core.Services.Food;
 
-public interface IFoodsService : IScopedDependency
+public interface IFoodService : IScopedDependency
 {
     Task<CreateFoodEvent> CreateFoodAsync(CreateFoodCommand command, CancellationToken cancellationToken);
 
