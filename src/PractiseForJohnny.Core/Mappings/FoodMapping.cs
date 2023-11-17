@@ -12,7 +12,7 @@ public class FoodMapping : Profile
 
         CreateMap<UpdateFoodDto, Foods>().ReverseMap();
 
-        CreateMap<DeleteFoodDto, FoodDeletedDto>();
+        CreateMap<Foods, FoodDeletedDto>();
 
         CreateMap<DeleteFoodDto, Foods>();
 
