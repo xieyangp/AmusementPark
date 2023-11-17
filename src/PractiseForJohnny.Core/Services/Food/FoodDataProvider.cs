@@ -28,7 +28,7 @@ public class FoodDataProvider : IFoodDataProvider
         return food;
     }
     
-    public async Task<Foods> UpdatedFoodAsync(UpdateFoodDto food, CancellationToken cancellationToken)
+    public async Task<Foods> UpdateFoodAsync(UpdateFoodDto food, CancellationToken cancellationToken)
     {
         var outfood = _mapper.Map<Foods>(food);
 

@@ -32,7 +32,7 @@ public class FoodService : IFoodService
 
     public async Task<FoodUpdatedEvent> UpdateFoodAsync(UpdateFoodCommand command, CancellationToken cancellationToken)
     {
-        var food = await _foodDataProvider.UpdatedFoodAsync(command.Food, cancellationToken);
+        var food = await _foodDataProvider.UpdateFoodAsync(command.Food, cancellationToken);
 
         return new FoodUpdatedEvent()
         {

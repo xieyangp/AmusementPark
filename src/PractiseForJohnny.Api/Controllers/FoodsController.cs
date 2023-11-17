@@ -13,7 +13,7 @@ public class FoodsController : ControllerBase
 {
     private readonly IMediator _mediator;
 
-    public FoodsController(IMediator mediator, IRepository repository)
+    public FoodsController(IMediator mediator)
     {
         _mediator = mediator;
     }
