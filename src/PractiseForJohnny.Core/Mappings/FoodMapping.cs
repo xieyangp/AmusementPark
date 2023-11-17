@@ -13,7 +13,13 @@ public class FoodMapping : Profile
         CreateMap<Foods, FoodCreatedDto>();
 
         CreateMap<UpdateFoodDto, Foods>();
+        
+        CreateMap<UpdateFoodDto, FoodUpdatedDto>();
 
-        CreateMap<Foods, FoodUpdatedDto>();
+        CreateMap<DeleteFoodDto, FoodDeletedDto>();
+
+        CreateMap<DeleteFoodDto, Foods>();
+
+        CreateMap<Foods, OutFoodDto>();
     }
 }

@@ -12,23 +12,16 @@ namespace PractiseForJohnny.Core.Services.Food;
 public class FoodService : IFoodService
 {
     private readonly IMapper _mapper;
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly IRepository _repository;
-
-    public FoodService(IRepository repository, IUnitOfWork unitOfWork, IMapper mapper)
+    private readonly IFoodDataProvider _foodDataProvider;
+    public FoodService(IMapper mapper, IFoodDataProvider foodDataProvider)
     {
-        _repository = repository;
         _mapper = mapper;
-        _unitOfWork = unitOfWork;
+        _foodDataProvider = foodDataProvider;
     }
 
     public async Task<FoodCreatedEvent> CreateFoodAsync(CreateFoodCommand command, CancellationToken cancellationToken)
-    {
-        var food = _mapper.Map<Foods>(command.Food);
-
-        await _repository.InsertAsync(food, cancellationToken).ConfigureAwait(false);
-
-        await _unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+    { 
+        var food = await _foodDataProvider.CreatedFoodAsync(_mapper.Map<Foods>(command.Food), cancellationToken).ConfigureAwait(false);
         
         return new FoodCreatedEvent
         {
@@ -38,21 +31,17 @@ public class FoodService : IFoodService
 
     public async Task<FoodUpdatedEvent> UpdateFoodAsync(UpdateFoodCommand command,CancellationToken cancellationToken)
     {
-        var food = _mapper.Map<Foods>(command.Food);
-
-        await _repository.UpdateAsync(food,cancellationToken).ConfigureAwait(false);
+        await _foodDataProvider.UpdatedFoodAsync(command.Food, cancellationToken);
         
         return new FoodUpdatedEvent()
         {
-            Result = _mapper.Map<FoodUpdatedDto>(food)
+            Result = _mapper.Map<FoodUpdatedDto>(command.Food)
         };
     }
 
     public async Task<FoodDeletedEvent> DeleteFoodAsync(DeleteFoodCommand command, CancellationToken cancellationToken)
     {
-        var food = _mapper.Map<Foods>(command.Food);
-        
-        await _repository.DeleteAsync(food, cancellationToken).ConfigureAwait(false);
+        var food = await _foodDataProvider.DeletedFoodAsync(command.Food, cancellationToken);
         
         return new FoodDeletedEvent()
         {
@@ -62,14 +51,9 @@ public class FoodService : IFoodService
 
     public async Task<FoodGetedEvent> GetFoodAsync(GetFoodRequest request, CancellationToken cancellationToken)
     {
-        var requestFood = request.Food;
-       
-
-       
-
         return new FoodGetedEvent
         {
-            Result = new OutFoodDto()
+            Result = await _foodDataProvider.GetFoodAsync(request.Food, cancellationToken)
         };
     }
 }
