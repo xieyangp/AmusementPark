@@ -49,9 +49,9 @@ public class FoodService : IFoodService
         };
     }
 
-    public async Task<FoodGetedEvent> GetFoodAsync(GetFoodRequest request, CancellationToken cancellationToken)
+    public async Task<FoodGetEvent> GetFoodAsync(GetFoodRequest request, CancellationToken cancellationToken)
     {
-        return new FoodGetedEvent
+        return new FoodGetEvent
         {
             Result = await _foodDataProvider.GetFoodAsync(request.Food, cancellationToken)
         };

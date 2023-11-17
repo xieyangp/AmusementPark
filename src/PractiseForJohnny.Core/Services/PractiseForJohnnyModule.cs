@@ -66,6 +66,7 @@ public class PractiseForJohnnyModule : Module
         var mediatorBuidler = new MediatorBuilder();
 
         mediatorBuidler.RegisterHandlers(_assemblies);
+        
         mediatorBuidler.ConfigureGlobalReceivePipe(x =>
         {
             x.UseUnitOfWork();

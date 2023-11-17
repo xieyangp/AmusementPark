@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace PractiseForJohnny.Core.Data;
 
-public class PratiseForJohnnyDbContext : DbContext , IUnitOfWork
+public class PratiseForJohnnyDbContext : DbContext, IUnitOfWork
 {
     private readonly ConnectionString _connectionString;
 
