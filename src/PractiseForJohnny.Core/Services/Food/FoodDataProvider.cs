@@ -12,7 +12,7 @@ public class FoodDataProvider : IFoodDataProvider
     private readonly IUnitOfWork _unitOfWork;
     private readonly IRepository _repository;
 
-    public FoodDataProvider(IMapper mapper,IUnitOfWork unitOfWork, IRepository repository)
+    public FoodDataProvider(IMapper mapper, IUnitOfWork unitOfWork, IRepository repository)
     {
         _mapper = mapper;
         _unitOfWork = unitOfWork;
@@ -24,28 +24,32 @@ public class FoodDataProvider : IFoodDataProvider
         await _repository.InsertAsync(food, cancellationToken).ConfigureAwait(false);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
-        
+
         return food;
     }
     
-    public async Task UpdatedFoodAsync(UpdateFoodDto food, CancellationToken cancellationToken)
+    public async Task<Foods> UpdatedFoodAsync(UpdateFoodDto food, CancellationToken cancellationToken)
     {
-        var old = await _repository.FirstOrDefaultAsync<Foods>(x => x.Id == food.Id,cancellationToken).ConfigureAwait(false);
-        
-        await _repository.UpdateAsync(_mapper.Map(food,old),cancellationToken).ConfigureAwait(false);
+        var outfood = _mapper.Map<Foods>(food);
+
+        await _repository.UpdateAsync(outfood, cancellationToken).ConfigureAwait(false);
+
+        return outfood;
     }
 
-    public async Task<DeleteFoodDto> DeletedFoodAsync(DeleteFoodDto food, CancellationToken cancellationToken)
+    public async Task<Foods> DeletedFoodAsync(DeleteFoodDto food, CancellationToken cancellationToken)
     {
-        await _repository.DeleteAsync(_mapper.Map<Foods>(food), cancellationToken).ConfigureAwait(false);
-        
-        return food;
+        var del = _mapper.Map<Foods>(food);
+
+        await _repository.DeleteAsync(del, cancellationToken).ConfigureAwait(false);
+
+        return del;
     }
 
-    public async Task<OutFoodDto> GetFoodAsync(GetFoodDto food, CancellationToken cancellationToken)
+    public async Task<Foods> GetFoodAsync(GetFoodDto food, CancellationToken cancellationToken)
     {
        var outfood = await _repository.FirstOrDefaultAsync<Foods>(x => x.Id == food.Id).ConfigureAwait(false);
 
-       return _mapper.Map<OutFoodDto>(outfood);
+       return outfood;
     }
 }

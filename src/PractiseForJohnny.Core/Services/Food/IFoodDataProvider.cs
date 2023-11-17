@@ -7,9 +7,9 @@ public interface IFoodDataProvider : IScopedDependency
 {
     Task<Foods> CreatedFoodAsync(Foods food, CancellationToken cancellationToken);
 
-    Task<DeleteFoodDto> DeletedFoodAsync(DeleteFoodDto food, CancellationToken cancellationToken);
+    Task<Foods> DeletedFoodAsync(DeleteFoodDto food, CancellationToken cancellationToken);
 
-    Task UpdatedFoodAsync(UpdateFoodDto food, CancellationToken cancellationToken);
+    Task<Foods> UpdatedFoodAsync(UpdateFoodDto food, CancellationToken cancellationToken);
 
-    Task<OutFoodDto> GetFoodAsync(GetFoodDto food, CancellationToken cancellationToken);
+    Task<Foods> GetFoodAsync(GetFoodDto food, CancellationToken cancellationToken);
 }

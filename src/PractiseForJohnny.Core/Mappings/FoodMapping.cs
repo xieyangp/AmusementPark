@@ -8,13 +8,9 @@ public class FoodMapping : Profile
 {
     public FoodMapping()
     {
-        CreateMap<CreateFoodDto, Foods>();
-        
-        CreateMap<Foods, FoodCreatedDto>();
+        CreateMap<CreateFoodDto, Foods>().ReverseMap();
 
-        CreateMap<UpdateFoodDto, Foods>();
-        
-        CreateMap<UpdateFoodDto, FoodUpdatedDto>();
+        CreateMap<UpdateFoodDto, Foods>().ReverseMap();
 
         CreateMap<DeleteFoodDto, FoodDeletedDto>();
 

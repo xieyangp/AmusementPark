@@ -1,3 +1,6 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace PractiseForJohnny.Message.DTO;
 
 public class CreateFoodDto
@@ -7,17 +10,9 @@ public class CreateFoodDto
     public string Color { get; set; }
 }
 
-public class FoodCreatedDto : CreateFoodDto
-{
-    public int Id { get; set; }
-}
-
 public class UpdateFoodDto : CreateFoodDto
 {
-    public int Id { get; set; }
-}
-
-public class FoodUpdatedDto : CreateFoodDto
-{
+    [Key] 
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 }

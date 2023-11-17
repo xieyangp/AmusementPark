@@ -12,12 +12,10 @@ namespace PractiseForJohnny.Api.Controllers;
 public class FoodsController : ControllerBase
 {
     private readonly IMediator _mediator;
-    private readonly IRepository _repository;
 
     public FoodsController(IMediator mediator, IRepository repository)
     {
         _mediator = mediator;
-        _repository = repository;
     }
 
     [HttpPost]

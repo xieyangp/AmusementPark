@@ -1,6 +1,7 @@
 using Mediator.Net.Context;
 using PractiseForJohnny.Core.Domain;
 using PractiseForJohnny.Message.Commands;
+using PractiseForJohnny.Message.DTO;
 using PractiseForJohnny.Message.Events;
 using PractiseForJohnny.Message.Requests;
 
@@ -14,5 +15,5 @@ public interface IFoodService : IScopedDependency
 
     Task<FoodDeletedEvent> DeleteFoodAsync(DeleteFoodCommand command, CancellationToken cancellationToken);
 
-    Task<FoodGetEvent> GetFoodAsync(GetFoodRequest request, CancellationToken cancellationToken);
+    Task<OutFoodDto> GetFoodAsync(GetFoodRequest request, CancellationToken cancellationToken);
 }
