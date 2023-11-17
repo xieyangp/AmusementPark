@@ -1,10 +1,13 @@
 using System.Reflection;
 using Autofac;
+using AutoMapper.Contrib.Autofac.DependencyInjection;
 using Mediator.Net;
 using Mediator.Net.Autofac;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using PractiseForJohnny.Core.Data;
+using PractiseForJohnny.Core.MiddleWares.UnifyResponse;
+using PractiseForJohnny.Core.MiddleWares.UnitOfWork;
 using PractiseForJohnny.Core.Services;
 using PractiseForJohnny.Core.Setting;
 using Module = Autofac.Module;
@@ -31,6 +34,8 @@ public class PractiseForJohnnyModule : Module
         RegisterDbContext(builder);
 
         RegisterSettings(builder);
+
+        RegisterAutoMapping(builder);
     }
     
     private void RegisterDependency(ContainerBuilder builder)
@@ -61,6 +66,11 @@ public class PractiseForJohnnyModule : Module
         var mediatorBuidler = new MediatorBuilder();
 
         mediatorBuidler.RegisterHandlers(_assemblies);
+        mediatorBuidler.ConfigureGlobalReceivePipe(x =>
+        {
+            x.UseUnitOfWork();
+            x.UseUnifyResponse();
+        });
 
         builder.RegisterMediator(mediatorBuidler);
     }
@@ -72,6 +82,8 @@ public class PractiseForJohnnyModule : Module
             .As<DbContext>()
             .AsImplementedInterfaces()
             .InstancePerLifetimeScope();
+        
+        builder.RegisterType<EfRepository>().As<IRepository>().InstancePerLifetimeScope();
     }
     
     private void RegisterSettings(ContainerBuilder builder)
@@ -81,5 +93,10 @@ public class PractiseForJohnnyModule : Module
             .ToArray();
 
         builder.RegisterTypes(settingTypes).AsSelf().SingleInstance();
+    }
+
+    private void RegisterAutoMapping(ContainerBuilder builder)
+    {
+        builder.RegisterAutoMapper(typeof(PractiseForJohnnyModule).Assembly);
     }
 }

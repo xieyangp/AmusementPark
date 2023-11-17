@@ -4,9 +4,9 @@ using PractiseForJohnny.Message.Events;
 
 namespace PractiseForJohnny.Core.Handler.EventHandlers;
 
-public class CreateFoodEventHandler : IEventHandler<CreateFoodEvent>
+public class CreateFoodEventHandler : IEventHandler<FoodCreatedEvent>
 {
-    public Task Handle(IReceiveContext<CreateFoodEvent> context, CancellationToken cancellationToken)
+    public Task Handle(IReceiveContext<FoodCreatedEvent> context, CancellationToken cancellationToken)
     {
         return Task.CompletedTask;
     }

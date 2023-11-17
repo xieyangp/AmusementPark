@@ -8,11 +8,11 @@ namespace PractiseForJohnny.Core.Services.Food;
 
 public interface IFoodService : IScopedDependency
 {
-    Task<CreateFoodEvent> CreateFoodAsync(CreateFoodCommand command, CancellationToken cancellationToken);
+    Task<FoodCreatedEvent> CreateFoodAsync(CreateFoodCommand command, CancellationToken cancellationToken);
 
-    Task<UpdateFoodEvent> UpdateFoodAsync(UpdateFoodCommand command, CancellationToken cancellationToken);
+    Task<FoodUpdatedEvent> UpdateFoodAsync(UpdateFoodCommand command, CancellationToken cancellationToken);
 
-    Task<DeleteFoodEvent> DeleteFoodAsync(DeleteFoodCommand command, CancellationToken cancellationToken);
+    Task<FoodDeletedEvent> DeleteFoodAsync(DeleteFoodCommand command, CancellationToken cancellationToken);
 
-    Task<GetFoodEvent> GetFoodAsync(GetFoodRequest request, CancellationToken cancellationToken);
+    Task<FoodGetedEvent> GetFoodAsync(GetFoodRequest request, CancellationToken cancellationToken);
 }

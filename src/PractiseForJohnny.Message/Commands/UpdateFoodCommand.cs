@@ -11,5 +11,5 @@ public class UpdateFoodCommand : ICommand
 
 public class UpdateFoodResponse : IResponse
 {
-    public string Result { get; set; }
+    public FoodUpdatedDto Result { get; set; }
 }

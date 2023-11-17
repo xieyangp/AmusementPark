@@ -1,4 +1,5 @@
 using Mediator.Net;
+using Mediator.Net.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using PractiseForJohnny.Core.Data;
 using PractiseForJohnny.Message.Commands;
@@ -11,10 +12,12 @@ namespace PractiseForJohnny.Api.Controllers;
 public class FoodsController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IRepository _repository;
 
-    public FoodsController(IMediator mediator)
+    public FoodsController(IMediator mediator, IRepository repository)
     {
         _mediator = mediator;
+        _repository = repository;
     }
 
     [HttpPost]

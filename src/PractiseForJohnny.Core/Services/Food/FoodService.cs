@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using PractiseForJohnny.Core.Data;
 using PractiseForJohnny.Core.Domain;
@@ -10,84 +11,65 @@ namespace PractiseForJohnny.Core.Services.Food;
 
 public class FoodService : IFoodService
 {
-    private readonly PratiseForJohnnyDbContext _pratiseForJohnnyDbContext;
+    private readonly IMapper _mapper;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IRepository _repository;
 
-    public FoodService(PratiseForJohnnyDbContext pratiseForJohnnyDbContext)
+    public FoodService(IRepository repository, IUnitOfWork unitOfWork, IMapper mapper)
     {
-        _pratiseForJohnnyDbContext = pratiseForJohnnyDbContext;
+        _repository = repository;
+        _mapper = mapper;
+        _unitOfWork = unitOfWork;
     }
 
-    public async Task<CreateFoodEvent> CreateFoodAsync(CreateFoodCommand command, CancellationToken cancellationToken)
+    public async Task<FoodCreatedEvent> CreateFoodAsync(CreateFoodCommand command, CancellationToken cancellationToken)
     {
-        var food = new Foods()
-        {
-            Name = command.Food.Name,
-            Color = command.Food.Color
-        };
+        var food = _mapper.Map<Foods>(command.Food);
 
-        await _pratiseForJohnnyDbContext.AddAsync(food, cancellationToken).ConfigureAwait(false);
+        await _repository.InsertAsync(food, cancellationToken).ConfigureAwait(false);
 
-        var result = await _pratiseForJohnnyDbContext.SaveChangesAsync(cancellationToken).ConfigureAwait(false) > 0
-            ? "添加成功"
-            : "添加失败";
-
-        return new CreateFoodEvent
-        {
-            Result = result
-        };
-    }
-
-    public async Task<UpdateFoodEvent> UpdateFoodAsync(UpdateFoodCommand command,CancellationToken cancellationToken)
-    {
-        var commandFood = command.Food;
-        var food= await _pratiseForJohnnyDbContext.FindAsync<Foods>(commandFood.Id).ConfigureAwait(false);
-        food.Name = commandFood.Name;
-        food.Color = commandFood.Color;
-
-        _pratiseForJohnnyDbContext.Update(food);
+        await _unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         
-        var result = await _pratiseForJohnnyDbContext.SaveChangesAsync(cancellationToken).ConfigureAwait(false) > 0
-            ? "修改成功"
-            : "修改失败";
-        
-        return new UpdateFoodEvent()
+        return new FoodCreatedEvent
         {
-            Result = result
+            Result = _mapper.Map<FoodCreatedDto>(food)
         };
     }
 
-    public async Task<DeleteFoodEvent> DeleteFoodAsync(DeleteFoodCommand command, CancellationToken cancellationToken)
+    public async Task<FoodUpdatedEvent> UpdateFoodAsync(UpdateFoodCommand command,CancellationToken cancellationToken)
     {
-        var commandFood = command.Food;
-        var food = await _pratiseForJohnnyDbContext.FindAsync<Foods>(commandFood.Id).ConfigureAwait(false);
-      
-        _pratiseForJohnnyDbContext.Remove(food);
+        var food = _mapper.Map<Foods>(command.Food);
+
+        await _repository.UpdateAsync(food,cancellationToken).ConfigureAwait(false);
         
-        var result = await _pratiseForJohnnyDbContext.SaveChangesAsync(cancellationToken).ConfigureAwait(false) > 0
-            ? "删除成功"
-            : "删除失败";
-       
-        return new DeleteFoodEvent()
+        return new FoodUpdatedEvent()
         {
-            Result = result
+            Result = _mapper.Map<FoodUpdatedDto>(food)
         };
     }
 
-    public async Task<GetFoodEvent> GetFoodAsync(GetFoodRequest request, CancellationToken cancellationToken)
+    public async Task<FoodDeletedEvent> DeleteFoodAsync(DeleteFoodCommand command, CancellationToken cancellationToken)
+    {
+        var food = _mapper.Map<Foods>(command.Food);
+        
+        await _repository.DeleteAsync(food, cancellationToken).ConfigureAwait(false);
+        
+        return new FoodDeletedEvent()
+        {
+            Result = _mapper.Map<FoodDeletedDto>(food)
+        };
+    }
+
+    public async Task<FoodGetedEvent> GetFoodAsync(GetFoodRequest request, CancellationToken cancellationToken)
     {
         var requestFood = request.Food;
-        var food = await _pratiseForJohnnyDbContext.FindAsync<Foods>(requestFood.Id);
+       
 
-        var result = new OutFoodDto()
-        {
-            Id = food.Id,
-            Name = food.Name,
-            Color = food.Color
-        };
+       
 
-        return new GetFoodEvent
+        return new FoodGetedEvent
         {
-            Result = result
+            Result = new OutFoodDto()
         };
     }
 }

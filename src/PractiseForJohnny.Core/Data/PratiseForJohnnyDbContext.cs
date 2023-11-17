@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace PractiseForJohnny.Core.Data;
 
-public class PratiseForJohnnyDbContext : DbContext
+public class PratiseForJohnnyDbContext : DbContext , IUnitOfWork
 {
     private readonly ConnectionString _connectionString;
 
@@ -29,4 +29,6 @@ public class PratiseForJohnnyDbContext : DbContext
                     modelBuilder.Model.AddEntityType(x);
             });
     }
+    
+    public bool ShouldSaveChanges { get; set; }
 }
