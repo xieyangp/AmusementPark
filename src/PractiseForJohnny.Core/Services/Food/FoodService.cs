@@ -46,7 +46,7 @@ public class FoodService : IFoodService
 
         return new FoodDeletedEvent()
         {
-            Result = _mapper.Map<FoodDeletedDto>(food)
+            Result = _mapper.Map<DeleteFoodDto>(food)
         };
     }
 

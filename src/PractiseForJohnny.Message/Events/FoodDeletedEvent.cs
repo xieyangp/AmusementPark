@@ -5,5 +5,5 @@ namespace PractiseForJohnny.Message.Events;
 
 public class FoodDeletedEvent : IEvent
 {
-    public FoodDeletedDto Result { get; set; }
+    public DeleteFoodDto Result { get; set; }
 }

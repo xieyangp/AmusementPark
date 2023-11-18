@@ -10,5 +10,5 @@ public class DeleteFoodCommand : ICommand
 
 public class DeleteFoodResponse : IResponse
 {
-    public FoodDeletedDto Result { get; set; }
+    public DeleteFoodDto Result { get; set; }
 }

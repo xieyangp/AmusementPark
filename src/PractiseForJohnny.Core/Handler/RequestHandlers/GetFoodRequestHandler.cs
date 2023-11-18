@@ -16,11 +16,9 @@ public class GetFoodRequestHandler : IRequestHandler<GetFoodRequest, GetFoodResp
 
     public async Task<GetFoodResponse> Handle(IReceiveContext<GetFoodRequest> context, CancellationToken cancellationToken)
     {
-        var @event = await _foodService.GetFoodAsync(context.Message, cancellationToken).ConfigureAwait(false);
-
         return new GetFoodResponse
         {
-            Result = @event
+            Result = await _foodService.GetFoodAsync(context.Message, cancellationToken).ConfigureAwait(false)
         };
     }
 }
