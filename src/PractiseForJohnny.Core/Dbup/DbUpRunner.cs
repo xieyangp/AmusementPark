@@ -17,10 +17,10 @@ public class DbUpRunner
         EnsureDatabase.For.MySqlDatabase(_connectionString);
         
         string outPutDirectory = Path.GetFullPath("../PractiseForJohnny.Core/DbUp");
-        
+
         var upgradeEngine = DeployChanges.To.MySqlDatabase(_connectionString)
-            .WithScriptsAndCodeEmbeddedInAssembly(typeof(DbUpRunner).Assembly,s => s.Contains("0002"))
-            .WithScriptsFromFileSystem(outPutDirectory, new FileSystemScriptOptions { IncludeSubDirectories = true ,Filter = s => s.Contains("0001")})
+            .WithScriptsAndCodeEmbeddedInAssembly(typeof(DbUpRunner).Assembly, s => s.EndsWith(".cs"))
+            .WithScriptsFromFileSystem(outPutDirectory, new FileSystemScriptOptions{ IncludeSubDirectories = true, Filter = s => s.EndsWith(".sql") })
             .WithTransaction()
             .LogToAutodetectedLog()
             .LogToConsole()
@@ -28,12 +28,10 @@ public class DbUpRunner
 
         var result = upgradeEngine.PerformUpgrade();
 
-        if (!result.Successful)
-            throw result.Error;
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Success!");
-            Console.ResetColor();
-        }
+        if (!result.Successful) throw result.Error;
+            
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("Success!");
+        Console.ResetColor();
     }
 }
