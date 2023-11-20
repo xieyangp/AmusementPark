@@ -1,4 +1,6 @@
 using Autofac.Extensions.DependencyInjection;
+using PractiseForJohnny.Core.Setting.System;
+using PractiseForJohnny.Message.Dbup;
 
 namespace PractiseForJohnny.Api;
 
@@ -10,6 +12,8 @@ public class Program
             .AddJsonFile("appsettings.json")
             .AddEnvironmentVariables()
             .Build();
+        
+        new DbupRunner(new ConnectionString(configuration).Value).Run();
         
         CreateHostBuilder(args).Build().Run();
     }
