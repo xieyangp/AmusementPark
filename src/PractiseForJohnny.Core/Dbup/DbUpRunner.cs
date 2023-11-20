@@ -1,4 +1,5 @@
 using DbUp;
+using DbUp.Engine;
 using DbUp.ScriptProviders;
 
 namespace PractiseForJohnny.Core.Dbup;
@@ -20,7 +21,7 @@ public class DbUpRunner
 
         var upgradeEngine = DeployChanges.To.MySqlDatabase(_connectionString)
             .WithScriptsAndCodeEmbeddedInAssembly(typeof(DbUpRunner).Assembly, s => s.EndsWith(".cs"))
-            .WithScriptsFromFileSystem(outPutDirectory, new FileSystemScriptOptions{ IncludeSubDirectories = true, Filter = s => s.EndsWith(".sql") })
+            .WithScriptsFromFileSystem(outPutDirectory)
             .WithTransaction()
             .LogToAutodetectedLog()
             .LogToConsole()
