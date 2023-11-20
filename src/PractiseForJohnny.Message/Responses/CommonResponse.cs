@@ -7,6 +7,7 @@ public class CommonResponse<T> : CommonResponse
 {
     public T Data { get; set; }
 }
+
 public class CommonResponse : IResponse
 {
     public HttpStatusCode Code { get; set; }
