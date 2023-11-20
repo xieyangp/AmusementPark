@@ -15,5 +15,4 @@ public class Scripts0002_initial_tables : IScript
                             color varchar(100) not null
                         ) charset=utf8mb4";
         }
-
 }

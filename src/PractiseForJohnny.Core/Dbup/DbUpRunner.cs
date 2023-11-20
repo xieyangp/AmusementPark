@@ -1,4 +1,3 @@
-using System.Text;
 using DbUp;
 using DbUp.ScriptProviders;
 
