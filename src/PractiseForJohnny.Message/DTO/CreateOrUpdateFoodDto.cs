@@ -1,3 +1,6 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace PractiseForJohnny.Message.DTO;
 
 public class CreateFoodDto
@@ -9,5 +12,7 @@ public class CreateFoodDto
 
 public class UpdateFoodDto : CreateFoodDto
 {
+    [Key] 
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 }
