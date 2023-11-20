@@ -1,4 +1,7 @@
+using System.Text;
 using DbUp;
+using DbUp.ScriptProviders;
+using PractiseForJohnny.Message.Dbup.Scripts_2023;
 
 namespace PractiseForJohnny.Message.Dbup;
 
@@ -14,7 +17,7 @@ public class DbupRunner
     public void Run()
     {
         var upgradEngin = DeployChanges.To.MySqlDatabase(_connectionString)
-            .WithScriptsAndCodeEmbeddedInAssembly(typeof(DbupRunner).Assembly)
+            .WithScripts(new Scripts0002_initial_tables())
             .WithTransaction()
             .LogToAutodetectedLog()
             .LogToConsole()
