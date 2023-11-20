@@ -1,4 +1,4 @@
-create table if not exists Foods
+create table if not exists foods
 (
     Id int not null primary key auto_increment,
     name varchar(50) not null,

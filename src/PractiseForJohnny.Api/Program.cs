@@ -1,6 +1,6 @@
 using Autofac.Extensions.DependencyInjection;
 using PractiseForJohnny.Core.Setting.System;
-using PractiseForJohnny.Message.Dbup;
+using PractiseForJohnny.Core.Dbup;
 
 namespace PractiseForJohnny.Api;
 
@@ -13,7 +13,7 @@ public class Program
             .AddEnvironmentVariables()
             .Build();
         
-        new DbupRunner(new ConnectionString(configuration).Value).Run();
+        new DbUpRunner(new ConnectionString(configuration).Value).Run();
         
         CreateHostBuilder(args).Build().Run();
     }
