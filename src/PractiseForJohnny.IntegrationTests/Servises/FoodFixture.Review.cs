@@ -1,3 +1,4 @@
+using NSubstitute;
 using PractiseForJohnny.Core.Data;
 using PractiseForJohnny.Core.Domain;
 using PractiseForJohnny.Message.DTO;
@@ -62,16 +63,10 @@ public partial class FoodFixture
 
         var food = new GetFoodDto { Id = 11 };
 
-        var beforeGetFood = await Run<IRepository, Foods>(async respository =>  await respository.GetByIdAsync<Foods>(food.Id));
-        
-        beforeGetFood.Id.ShouldBe(11);
-        beforeGetFood.Name.ShouldBe("cake");
-        beforeGetFood.Color.ShouldBe("red");
+        var getFood = await _foodsUtil.GetFood(food);
 
-        var afterGetFood = await _foodsUtil.GetFood(food);
-
-        afterGetFood.Result.Id.ShouldBe(11);
-        afterGetFood.Result.Name.ShouldBe("cake");
-        afterGetFood.Result.Color.ShouldBe("red");
+        getFood.Result.Id.ShouldBe(11);
+        getFood.Result.Name.ShouldBe("cake");
+        getFood.Result.Color.ShouldBe("red");
     }
 }
