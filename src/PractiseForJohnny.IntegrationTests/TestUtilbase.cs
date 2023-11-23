@@ -12,9 +12,9 @@ public class TestUtilbase
         _scope = scope;
     }
 
-    protected void SetupScope(ILifetimeScope scope) => _scope = scope; //?
+    protected void SetupScope(ILifetimeScope scope) => _scope = scope; 
 
-    protected void Run<T>(Action<T> action, Action<ContainerBuilder> extraRegistration = null)//无放回值
+    protected void Run<T>(Action<T> action, Action<ContainerBuilder> extraRegistration = null)
     {
         var dependency = extraRegistration != null
             ? _scope.BeginLifetimeScope(extraRegistration).Resolve<T>()
@@ -22,7 +22,7 @@ public class TestUtilbase
         action(dependency);
     }
 
-    protected void Run<T, R>(Action<T, R> action, Action<ContainerBuilder> extraRegistration = null)//两个参数无返回值
+    protected void Run<T, R>(Action<T, R> action, Action<ContainerBuilder> extraRegistration = null)
     {
         var lifetime = extraRegistration != null
             ? _scope.BeginLifetimeScope(extraRegistration)
@@ -33,7 +33,7 @@ public class TestUtilbase
         action(dependency, dependency2);
     }
 
-    protected void Run<T, R, L>(Action<T, R, L> action, Action<ContainerBuilder> extraRegistration = null)//三个无返回值
+    protected void Run<T, R, L>(Action<T, R, L> action, Action<ContainerBuilder> extraRegistration = null)
     {
         var lifetime = extraRegistration != null
             ? _scope.BeginLifetimeScope(extraRegistration)
@@ -45,7 +45,7 @@ public class TestUtilbase
         action(dependency, dependency2, dependency3);
     }
     
-    protected async Task Run<T, R, L>(Func<T, R, L, Task> action, Action<ContainerBuilder> extraRegistration = null)//异步无返回
+    protected async Task Run<T, R, L>(Func<T, R, L, Task> action, Action<ContainerBuilder> extraRegistration = null)
     {
         var lifetime = extraRegistration != null
             ? _scope.BeginLifetimeScope(extraRegistration)
@@ -57,7 +57,7 @@ public class TestUtilbase
         await action(dependency, dependency2, dependency3);
     }
     
-    protected async Task Run<T>(Func<T, Task> action, Action<ContainerBuilder> extraRegistration = null)//异步一参数无返回值
+    protected async Task Run<T>(Func<T, Task> action, Action<ContainerBuilder> extraRegistration = null)
     {
         var dependency = extraRegistration != null
             ? _scope.BeginLifetimeScope(extraRegistration).Resolve<T>()
@@ -65,7 +65,7 @@ public class TestUtilbase
         await action(dependency);
     }
     
-    protected async Task RunWithUnitOfWork<T>(Func<T, Task> action, Action<ContainerBuilder> extraRegistration = null)//异步一参数无返回值保存
+    protected async Task RunWithUnitOfWork<T>(Func<T, Task> action, Action<ContainerBuilder> extraRegistration = null)
     {
         var scope = extraRegistration != null
             ? _scope.BeginLifetimeScope(extraRegistration)
@@ -78,7 +78,7 @@ public class TestUtilbase
         await unitOfWork.SaveChangesAsync();
     }
     
-    protected async Task<R> Run<T, R>(Func<T, Task<R>> action, Action<ContainerBuilder> extraRegistration = null)//异步一参数有返回值
+    protected async Task<R> Run<T, R>(Func<T, Task<R>> action, Action<ContainerBuilder> extraRegistration = null)
     {
         var dependency = extraRegistration != null
             ? _scope.BeginLifetimeScope(extraRegistration).Resolve<T>()
@@ -86,7 +86,7 @@ public class TestUtilbase
         return await action(dependency);
     }
     
-    protected async Task<R> RunWithUnitOfWork<T, R>(Func<T, Task<R>> action, Action<ContainerBuilder> extraRegistration = null)//一参数有返回值保存
+    protected async Task<R> RunWithUnitOfWork<T, R>(Func<T, Task<R>> action, Action<ContainerBuilder> extraRegistration = null)
     {
         var scope = extraRegistration != null
             ? _scope.BeginLifetimeScope(extraRegistration)
@@ -101,7 +101,7 @@ public class TestUtilbase
         return result;
     }
     
-    protected async Task<R> RunWithUnitOfWork<T, U, R>(Func<T, U, Task<R>> action, Action<ContainerBuilder> extraRegistration = null)//异步两参数有放回值保存
+    protected async Task<R> RunWithUnitOfWork<T, U, R>(Func<T, U, Task<R>> action, Action<ContainerBuilder> extraRegistration = null)
     {
         var scope = extraRegistration != null
             ? _scope.BeginLifetimeScope(extraRegistration)
@@ -117,7 +117,7 @@ public class TestUtilbase
         return result;
     }
     
-    protected async Task RunWithUnitOfWork<T, U>(Func<T, U, Task> action, Action<ContainerBuilder> extraRegistration = null)//异步两参数无返回值保存
+    protected async Task RunWithUnitOfWork<T, U>(Func<T, U, Task> action, Action<ContainerBuilder> extraRegistration = null)
     {
         var scope = extraRegistration != null
             ? _scope.BeginLifetimeScope(extraRegistration)
@@ -131,7 +131,7 @@ public class TestUtilbase
         await unitOfWork.SaveChangesAsync();
     }
     
-    protected R Run<T, R>(Func<T, R> action, Action<ContainerBuilder> extraRegistration = null)//一参数一返回值
+    protected R Run<T, R>(Func<T, R> action, Action<ContainerBuilder> extraRegistration = null)
     {
         var dependency = extraRegistration != null
             ? _scope.BeginLifetimeScope(extraRegistration).Resolve<T>()
@@ -139,7 +139,7 @@ public class TestUtilbase
         return action(dependency);
     }
     
-    protected R Run<T, U, R>(Func<T, U, R> action, Action<ContainerBuilder> extraRegistration = null)//两参数一返回值
+    protected R Run<T, U, R>(Func<T, U, R> action, Action<ContainerBuilder> extraRegistration = null)
     {
         var lifetime = extraRegistration != null
             ? _scope.BeginLifetimeScope(extraRegistration)
@@ -150,7 +150,7 @@ public class TestUtilbase
         return action(dependency, dependency2);
     }
     
-    protected Task Run<T, U>(Func<T, U, Task> action, Action<ContainerBuilder> extraRegistration = null)//异步两参数无返回值
+    protected Task Run<T, U>(Func<T, U, Task> action, Action<ContainerBuilder> extraRegistration = null)
     {
         var lifetime = extraRegistration != null
             ? _scope.BeginLifetimeScope(extraRegistration)
