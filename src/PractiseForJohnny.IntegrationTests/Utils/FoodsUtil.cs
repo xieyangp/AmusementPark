@@ -17,12 +17,12 @@ public class FoodsUtil : TestUtil
 
     public async Task<CreateFoodResponse> CreateFood(CreateFoodDto food)
     {
-       return await RunWithUnitOfWork<IMediator, CreateFoodResponse>(async mediator =>
+        return await RunWithUnitOfWork<IMediator, CreateFoodResponse>(async mediator =>
         {
             var response = await mediator
                 .SendAsync<CreateFoodCommand, CreateFoodResponse>(
                     new CreateFoodCommand
-                        {Food = food});
+                        { Food = food });
             return response;
         });
     }
@@ -35,6 +35,7 @@ public class FoodsUtil : TestUtil
                 .SendAsync<UpdateFoodCommand, UpdateFoodResponse>(
                     new UpdateFoodCommand
                         { Food = food });
+            
             return response;
         });
     }
@@ -47,10 +48,8 @@ public class FoodsUtil : TestUtil
                 .SendAsync<DeleteFoodCommand, DeleteFoodResponse>
                 (
                     new DeleteFoodCommand
-                {
-                    Food = food
-                });
-            
+                        { Food = food });
+
             return response;
         });
     }
@@ -62,10 +61,8 @@ public class FoodsUtil : TestUtil
             var response = await mediator
                 .RequestAsync<GetFoodRequest, GetFoodResponse>
                 (
-                    new GetFoodRequest
-                    {
-                        Food = food
-                    });
+                    new GetFoodRequest 
+                    { Food = food });
 
             return response;
         });

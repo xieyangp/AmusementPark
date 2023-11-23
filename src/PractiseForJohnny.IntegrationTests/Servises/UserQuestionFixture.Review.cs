@@ -62,19 +62,18 @@ public partial class UserQuestionFixture
         await RunWithUnitOfWork<IRepository>(async repository =>
             await repository.InsertAsync<Foods>(new Foods { Id = 11, Name = "cake", Color = "red" })
                 .ConfigureAwait(false));
-        
-        var food = new GetFoodDto{ Id = 11 };
-        
-        
+
+        var food = new GetFoodDto { Id = 11 };
+
         var beforeGetFood = await Run<IRepository, Foods>(async respository =>
             await respository.GetByIdAsync<Foods>(food.Id));
-        
+
         beforeGetFood.Id.ShouldBe(11);
         beforeGetFood.Name.ShouldBe("cake");
         beforeGetFood.Color.ShouldBe("red");
 
         var afterGetFood = await _foodsUtil.GetFood(food);
-        
+
         afterGetFood.Result.Id.ShouldBe(11);
         afterGetFood.Result.Name.ShouldBe("cake");
         afterGetFood.Result.Color.ShouldBe("red");

@@ -12,7 +12,7 @@ public class TestUtilbase
         _scope = scope;
     }
 
-    protected void SetupScope(ILifetimeScope scope) => _scope = scope; 
+    protected void SetupScope(ILifetimeScope scope) => _scope = scope;
 
     protected void Run<T>(Action<T> action, Action<ContainerBuilder> extraRegistration = null)
     {
@@ -44,7 +44,7 @@ public class TestUtilbase
         var dependency3 = lifetime.Resolve<L>();
         action(dependency, dependency2, dependency3);
     }
-    
+
     protected async Task Run<T, R, L>(Func<T, R, L, Task> action, Action<ContainerBuilder> extraRegistration = null)
     {
         var lifetime = extraRegistration != null
@@ -56,7 +56,7 @@ public class TestUtilbase
         var dependency3 = lifetime.Resolve<L>();
         await action(dependency, dependency2, dependency3);
     }
-    
+
     protected async Task Run<T>(Func<T, Task> action, Action<ContainerBuilder> extraRegistration = null)
     {
         var dependency = extraRegistration != null
@@ -64,7 +64,7 @@ public class TestUtilbase
             : _scope.BeginLifetimeScope().Resolve<T>();
         await action(dependency);
     }
-    
+
     protected async Task RunWithUnitOfWork<T>(Func<T, Task> action, Action<ContainerBuilder> extraRegistration = null)
     {
         var scope = extraRegistration != null
@@ -83,6 +83,7 @@ public class TestUtilbase
         var dependency = extraRegistration != null
             ? _scope.BeginLifetimeScope(extraRegistration).Resolve<T>()
             : _scope.BeginLifetimeScope().Resolve<T>();
+        
         return await action(dependency);
     }
     
@@ -136,6 +137,7 @@ public class TestUtilbase
         var dependency = extraRegistration != null
             ? _scope.BeginLifetimeScope(extraRegistration).Resolve<T>()
             : _scope.BeginLifetimeScope().Resolve<T>();
+        
         return action(dependency);
     }
     
@@ -157,6 +159,7 @@ public class TestUtilbase
             : _scope.BeginLifetimeScope();
         var dependency = lifetime.Resolve<T>();
         var dependency2 = lifetime.Resolve<U>();
+        
         return action(dependency, dependency2);
     }
 }

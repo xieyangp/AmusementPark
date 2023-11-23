@@ -17,7 +17,7 @@ public partial class TestBase
     {
         "schemaversions"
     };
-    
+
     private void RunDbUpIfRequired()
     {
         if (!shouldRunDbUpDatabases.GetValueOrDefault(_databaseName, true)) return;
@@ -48,7 +48,7 @@ public partial class TestBase
         containerBuilder.RegisterInstance(configuration).AsImplementedInterfaces();
         return configuration;
     }
-    
+
     public async Task InitializeAsync()
     {
     }
@@ -57,7 +57,7 @@ public partial class TestBase
     {
         return Task.CompletedTask;
     }
-    
+
     private void ClearDatabaseRecord()
     {
         try
@@ -99,7 +99,7 @@ public partial class TestBase
             Console.WriteLine($"Error cleaning up data, {_testTopic}, {ex}");
         }
     }
-    
+
     public void Dispose()
     {
         ClearDatabaseRecord();
