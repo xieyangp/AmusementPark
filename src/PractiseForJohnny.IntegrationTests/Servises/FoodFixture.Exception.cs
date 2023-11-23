@@ -13,17 +13,18 @@ public partial class FoodFixture
     {
         var food = new CreateFoodDto { Name = "mike", Color = "white" };
 
-        var beforeCreateFood = await Run<IRepository, int>(async repository =>
-            await repository.CountAsync<Foods>(x => true).ConfigureAwait(false));
+        await Run<IRepository>(async repository =>
+        {
+            var beforeCreateFood = await repository.CountAsync<Foods>(x => true).ConfigureAwait(false);
 
-        beforeCreateFood.ShouldBe(0);
+            beforeCreateFood.ShouldBe(0);
 
-        await _foodsUtil.CreateFood(food);
+            await _foodsUtil.CreateFood(food);
 
-        var afterUpdateFood = await Run<IRepository, Foods>(async repository =>
-            await repository.FirstOrDefaultAsync<Foods>(i => i.Name.Equals("mike")).ConfigureAwait(false));
-        
-        afterUpdateFood.Name.ShouldBe("mike");
-        afterUpdateFood.Color.ShouldBe("white");
+            var afterUpdateFood = await repository.FirstOrDefaultAsync<Foods>(i => i.Name.Equals("mike")).ConfigureAwait(false);
+            
+            afterUpdateFood?.Color.ShouldBe("white");
+            afterUpdateFood?.Name.ShouldBe("mike");
+        });
     }
 }
