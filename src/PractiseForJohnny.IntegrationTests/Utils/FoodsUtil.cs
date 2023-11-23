@@ -18,7 +18,7 @@ public class FoodsUtil : TestUtil
         {
             var response = await mediator
                 .SendAsync<CreateFoodCommand, CreateFoodResponse>(
-                    new CreateFoodCommand
+                    new CreateFoodCommand 
                         { Food = food });
             return response;
         });
@@ -30,7 +30,7 @@ public class FoodsUtil : TestUtil
         {
             var response = await mediator
                 .SendAsync<UpdateFoodCommand, UpdateFoodResponse>(
-                    new UpdateFoodCommand
+                    new UpdateFoodCommand 
                         { Food = food });
             
             return response;
@@ -44,7 +44,7 @@ public class FoodsUtil : TestUtil
             var response = await mediator
                 .SendAsync<DeleteFoodCommand, DeleteFoodResponse>
                 (
-                    new DeleteFoodCommand
+                    new DeleteFoodCommand 
                         { Food = food });
 
             return response;
