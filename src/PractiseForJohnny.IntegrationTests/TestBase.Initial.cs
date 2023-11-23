@@ -1,5 +1,4 @@
 using Autofac;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;

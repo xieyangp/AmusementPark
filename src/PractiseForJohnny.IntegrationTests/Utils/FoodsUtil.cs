@@ -1,8 +1,5 @@
 using Autofac;
 using Mediator.Net;
-using Microsoft.VisualBasic;
-using PractiseForJohnny.Core.Data;
-using PractiseForJohnny.Core.Domain;
 using PractiseForJohnny.Message.Commands;
 using PractiseForJohnny.Message.DTO;
 using PractiseForJohnny.Message.Requests;

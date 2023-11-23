@@ -1,11 +1,6 @@
-using Mediator.Net.Contracts;
-using PractiseForJohnny.Core.Data;
-using PractiseForJohnny.Core.Domain;
 using PractiseForJohnny.IntegarationTests.TestBaseClasses;
 using PractiseForJohnny.IntegarationTests.Utills;
-using PractiseForJohnny.Message.DTO;
-using Shouldly;
-using Xunit;
+
 
 namespace PractiseForJohnny.IntegarationTests.Servises;
 

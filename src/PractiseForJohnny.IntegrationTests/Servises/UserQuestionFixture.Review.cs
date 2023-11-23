@@ -78,5 +78,4 @@ public partial class UserQuestionFixture
         afterGetFood.Result.Name.ShouldBe("cake");
         afterGetFood.Result.Color.ShouldBe("red");
     }
-
 }
