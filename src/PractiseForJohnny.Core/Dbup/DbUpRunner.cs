@@ -21,7 +21,7 @@ public class DbUpRunner
 
         var upgradeEngine = DeployChanges.To.MySqlDatabase(_connectionString)
             .WithScriptsAndCodeEmbeddedInAssembly(typeof(DbUpRunner).Assembly, s => s.EndsWith(".cs"))
-            .WithScriptsFromFileSystem(outPutDirectory)
+            // .WithScriptsFromFileSystem(outPutDirectory)
             .WithTransaction()
             .LogToAutodetectedLog()
             .LogToConsole()
