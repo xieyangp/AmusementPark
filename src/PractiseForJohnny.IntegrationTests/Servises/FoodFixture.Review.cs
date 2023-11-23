@@ -6,14 +6,13 @@ using Xunit;
 
 namespace PractiseForJohnny.IntegarationTests.Servises;
 
-public partial class UserQuestionFixture
+public partial class FoodFixture
 {
     [Fact]
     public async Task CanUpdateFood()
     {
         await RunWithUnitOfWork<IRepository>(async repository =>
-            await repository.InsertAsync<Foods>(new Foods { Id = 11, Name = "cake", Color = "red" })
-                .ConfigureAwait(false));
+            await repository.InsertAsync<Foods>(new Foods { Id = 11, Name = "cake", Color = "red" }).ConfigureAwait(false));
 
         var food = new UpdateFoodDto { Id = 11, Name = "mike", Color = "white" };
 
@@ -38,9 +37,8 @@ public partial class UserQuestionFixture
     public async Task CanDeleteFood()
     {
         await RunWithUnitOfWork<IRepository>(async repository =>
-            await repository.InsertAsync<Foods>(new Foods { Id = 11, Name = "cake", Color = "red" })
-                .ConfigureAwait(false));
-
+            await repository.InsertAsync<Foods>(new Foods { Id = 11, Name = "cake", Color = "red" }).ConfigureAwait(false));
+        
         var food = new DeleteFoodDto() { Id = 11 };
 
         var beforeDeleteFood = await Run<IRepository, Foods>(async respository =>
@@ -60,14 +58,12 @@ public partial class UserQuestionFixture
     public async Task CanGetFood()
     {
         await RunWithUnitOfWork<IRepository>(async repository =>
-            await repository.InsertAsync<Foods>(new Foods { Id = 11, Name = "cake", Color = "red" })
-                .ConfigureAwait(false));
+            await repository.InsertAsync<Foods>(new Foods { Id = 11, Name = "cake", Color = "red" }).ConfigureAwait(false));
 
         var food = new GetFoodDto { Id = 11 };
 
-        var beforeGetFood = await Run<IRepository, Foods>(async respository =>
-            await respository.GetByIdAsync<Foods>(food.Id));
-
+        var beforeGetFood = await Run<IRepository, Foods>(async respository =>  await respository.GetByIdAsync<Foods>(food.Id));
+        
         beforeGetFood.Id.ShouldBe(11);
         beforeGetFood.Name.ShouldBe("cake");
         beforeGetFood.Color.ShouldBe("red");

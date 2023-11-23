@@ -6,7 +6,7 @@ using Xunit;
 
 namespace PractiseForJohnny.IntegarationTests.Servises;
 
-public partial class UserQuestionFixture
+public partial class FoodFixture
 {
     [Fact]
     public async Task CanCreateFood()
@@ -20,9 +20,10 @@ public partial class UserQuestionFixture
 
         await _foodsUtil.CreateFood(food);
 
-        var afterUpdateFood = await Run<IRepository, int>(async repository =>
-            await repository.CountAsync<Foods>(x => true).ConfigureAwait(false));
-
-        afterUpdateFood.ShouldBe(beforeCreateFood + 1);
+        var afterUpdateFood = await Run<IRepository, Foods>(async repository =>
+            await repository.FirstOrDefaultAsync<Foods>(i => i.Name.Equals("mike")).ConfigureAwait(false));
+        
+        afterUpdateFood.Name.ShouldBe("mike");
+        afterUpdateFood.Color.ShouldBe("white");
     }
 }
