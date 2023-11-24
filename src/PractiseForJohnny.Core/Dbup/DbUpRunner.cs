@@ -16,12 +16,9 @@ public class DbUpRunner
     public void Run()
     {
         EnsureDatabase.For.MySqlDatabase(_connectionString);
-        
-        string outPutDirectory = Path.GetFullPath("../PractiseForJohnny.Core/DbUp");
 
         var upgradeEngine = DeployChanges.To.MySqlDatabase(_connectionString)
             .WithScriptsAndCodeEmbeddedInAssembly(typeof(DbUpRunner).Assembly, s => s.EndsWith(".cs"))
-            .WithScriptsFromFileSystem(outPutDirectory)
             .WithTransaction()
             .LogToAutodetectedLog()
             .LogToConsole()
