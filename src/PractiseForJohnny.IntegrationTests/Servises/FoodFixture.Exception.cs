@@ -19,7 +19,7 @@ public partial class FoodFixture
 
             beforeCreateFood.ShouldBe(0);
 
-            await _foodsUtil.CreateFood(food);
+            await _foodsUtil.CreateFoodAsync(food);
 
             var afterUpdateFood = await repository.FirstOrDefaultAsync<Foods>(i => i.Name.Equals("mike")).ConfigureAwait(false);
             

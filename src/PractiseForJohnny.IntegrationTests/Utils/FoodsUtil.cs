@@ -12,7 +12,7 @@ public class FoodsUtil : TestUtil
     {
     }
 
-    public async Task<CreateFoodResponse> CreateFood(CreateFoodDto food)
+    public async Task<CreateFoodResponse> CreateFoodAsync(CreateFoodDto food)
     {
         return await RunWithUnitOfWork<IMediator, CreateFoodResponse>(async mediator =>
         {
@@ -23,7 +23,7 @@ public class FoodsUtil : TestUtil
         });
     }
 
-    public async Task<UpdateFoodResponse> UpdateFood(UpdateFoodDto food)
+    public async Task<UpdateFoodResponse> UpdateFoodAsync(UpdateFoodDto food)
     {
         return await RunWithUnitOfWork<IMediator, UpdateFoodResponse>(async mediator =>
         {
@@ -34,7 +34,7 @@ public class FoodsUtil : TestUtil
         });
     }
 
-    public async Task<DeleteFoodResponse> DeleteFood(DeleteFoodDto food)
+    public async Task<DeleteFoodResponse> DeleteFoodAsync(DeleteFoodDto food)
     {
         return await RunWithUnitOfWork<IMediator, DeleteFoodResponse>(async mediator =>
         {
@@ -45,7 +45,7 @@ public class FoodsUtil : TestUtil
         });
     }
 
-    public async Task<GetFoodResponse> GetFood(GetFoodDto food)
+    public async Task<GetFoodResponse> GetFoodAsync(GetFoodDto food)
     {
         return await RunWithUnitOfWork<IMediator, GetFoodResponse>(async mediator =>
         {

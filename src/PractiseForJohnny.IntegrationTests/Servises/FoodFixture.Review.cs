@@ -24,7 +24,7 @@ public partial class FoodFixture
         beforeUpdateFood.Name.ShouldBe("cake");
         beforeUpdateFood.Color.ShouldBe("red");
 
-        await _foodsUtil.UpdateFood(food);
+        await _foodsUtil.UpdateFoodAsync(food);
 
         var afterUpdateFood = await Run<IRepository, Foods>(async repository =>
             await repository.GetByIdAsync<Foods>(food.Id).ConfigureAwait(false));
@@ -47,7 +47,7 @@ public partial class FoodFixture
 
         beforeDeleteFood.Id.ShouldBe(11);
 
-        await _foodsUtil.DeleteFood(food);
+        await _foodsUtil.DeleteFoodAsync(food);
 
         var afterDeleteFood = await Run<IRepository, Foods>(async respository =>
             await respository.GetByIdAsync<Foods>(food.Id));
@@ -63,7 +63,7 @@ public partial class FoodFixture
 
         var food = new GetFoodDto { Id = 11 };
 
-        var getFood = await _foodsUtil.GetFood(food);
+        var getFood = await _foodsUtil.GetFoodAsync(food);
 
         getFood.Result.Id.ShouldBe(11);
         getFood.Result.Name.ShouldBe("cake");
