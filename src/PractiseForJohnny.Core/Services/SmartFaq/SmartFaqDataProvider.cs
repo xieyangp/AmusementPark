@@ -46,7 +46,10 @@ public class SmartFaqDataProvider : ISmartFaqDataProvider
 
     public async Task<List<UserQuestion>> GetUserQuestionsByIdsAsync(List<int> userQuestionIds, CancellationToken cancellationToken)
     {
-        return await _repository.Query<UserQuestion>().Where(i => userQuestionIds.Contains(i.Id)).ToListAsync().ConfigureAwait(false);
+        return await _repository.Query<UserQuestion>()
+            .Where(i => userQuestionIds.Contains(i.Id))
+            .ToListAsync(cancellationToken)
+            .ConfigureAwait(false);
     }
     
     public async Task UpdateUserQuestionsAsync(List<UserQuestion> userQuestions, CancellationToken cancellationToken)

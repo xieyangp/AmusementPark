@@ -33,6 +33,8 @@ public class SmartFaqService : ISmartFaqService
     
     public async Task<UserQuestionUpdateEvent> UpdateUserQuestionsAsync(UpdateUserQuestionsCommand command, CancellationToken cancellationToken)
     {
+        if (!command.UpdatedQuestions.Any()) return new UserQuestionUpdateEvent();
+        
         var userQuestionIds = command.UpdatedQuestions.Select(i => i.Id).ToList();
 
         var userQuestions = await _smartFaqDataProvider.GetUserQuestionsByIdsAsync(userQuestionIds, cancellationToken).ConfigureAwait(false);

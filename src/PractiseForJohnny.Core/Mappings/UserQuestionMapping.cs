@@ -8,9 +8,7 @@ public class UserQuestionMapping : Profile
 {
     public UserQuestionMapping()
     {
-        CreateMap<UserQuestion, UserQuestionDto>();
-
-        CreateMap<UserQuestionDto, UserQuestion>();
+        CreateMap<UserQuestion, UserQuestionDto>().ReverseMap();
 
         CreateMap<UpdateUserQuestionDto, UserQuestion>();
     }

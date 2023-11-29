@@ -20,7 +20,7 @@ public class SmartFaqController : ControllerBase
     [Route("faq/review")]
     public async Task<IActionResult> GetUserQuestionsForReviewAsync([FromBody] GetUserQuestionsForReviewRequest request)
     {
-        var response = await _mediator.RequestAsync<GetUserQuestionsForReviewRequest, GetUserQuestionsForReviewResponse>(request);
+        var response = await _mediator.RequestAsync<GetUserQuestionsForReviewRequest, GetUserQuestionsForReviewResponse>(request).ConfigureAwait(false);
 
         return Ok(response);
     }
@@ -29,7 +29,7 @@ public class SmartFaqController : ControllerBase
     [Route("faq/update/question")]
     public async Task<IActionResult> UpdateUserQuestions([FromBody] UpdateUserQuestionsCommand command)
     {
-        var response = await _mediator.SendAsync<UpdateUserQuestionsCommand, UpdateUserQuestionsResponse>(command);
+        var response = await _mediator.SendAsync<UpdateUserQuestionsCommand, UpdateUserQuestionsResponse>(command).ConfigureAwait(false);
 
         return Ok(response);
     }
