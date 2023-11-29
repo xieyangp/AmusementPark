@@ -1,10 +1,10 @@
-using Microsoft.EntityFrameworkCore;
+using Xunit;
+using Shouldly;
 using PractiseForJohnny.Core.Data;
+using Microsoft.EntityFrameworkCore;
 using PractiseForJohnny.Core.Domain;
 using PractiseForJohnny.Message.DTO;
 using PractiseForJohnny.Message.Enum;
-using Shouldly;
-using Xunit;
 
 namespace PractiseForJohnny.IntegarationTests.Servises;
 
@@ -19,7 +19,7 @@ public partial class UserQuestionFixture
         await _userQuestionUtil.AddUserQuestionsAsync(11, 1, UserQuestionStatusEnum.Pending, "before update correctqid 1 status pending");
         await _userQuestionUtil.AddUserQuestionsAsync(12, 1, UserQuestionStatusEnum.ReadyToTrain, "before update correctqid 1 status readyToTrain");
 
-        var updatedQuestions = new List<UpdateUserQuestionDto>()
+        var updatedUserQuestions = new List<UpdateUserQuestionDto>()
         {
             new()
             {
@@ -58,11 +58,11 @@ public partial class UserQuestionFixture
             }
         };
 
-        var userQuestionId = updatedQuestions.Select(i => i.Id).ToList();
+        var userQuestionId = updatedUserQuestions.Select(i => i.Id).ToList();
 
         var beforeUserQuestions = await Run<IRepository, List<UserQuestion>>(async repository =>
         {
-            return await repository.Query<UserQuestion>(i => userQuestionId.Contains(i.Id)).ToListAsync();
+            return await repository.Query<UserQuestion>(i => userQuestionId.Contains(i.Id)).ToListAsync().ConfigureAwait(false);
         });
         
         beforeUserQuestions[0].Id.ShouldBe(8);
@@ -90,31 +90,31 @@ public partial class UserQuestionFixture
         beforeUserQuestions[4].Status.ShouldBe(UserQuestionStatusEnum.ReadyToTrain);
         beforeUserQuestions[4].Remark.ShouldBe("before update correctqid 1 status readyToTrain");
         
-        var userQuestionUpdate = await _userQuestionUtil.UpdateUserQuestionsAsync(updatedQuestions);
+        var userQuestionsUpdate = await _userQuestionUtil.UpdateUserQuestionsAsync(updatedUserQuestions);
         
-        userQuestionUpdate.Data[0].Id.ShouldBe(8);
-        userQuestionUpdate.Data[0].CorrectQid.ShouldBe(2);
-        userQuestionUpdate.Data[0].Status.ShouldBe(UserQuestionStatusEnum.Comeback);
-        userQuestionUpdate.Data[0].Remark.ShouldBe("updated correcdQid 2 status comeback");
+        userQuestionsUpdate.Data[0].Id.ShouldBe(8);
+        userQuestionsUpdate.Data[0].CorrectQid.ShouldBe(2);
+        userQuestionsUpdate.Data[0].Status.ShouldBe(UserQuestionStatusEnum.Comeback);
+        userQuestionsUpdate.Data[0].Remark.ShouldBe("updated correcdQid 2 status comeback");
         
-        userQuestionUpdate.Data[1].Id.ShouldBe(9);
-        userQuestionUpdate.Data[1].CorrectQid.ShouldBe(3);
-        userQuestionUpdate.Data[1].Status.ShouldBe(UserQuestionStatusEnum.Noise);
-        userQuestionUpdate.Data[1].Remark.ShouldBe("updated correcdQid 3 status noise");
+        userQuestionsUpdate.Data[1].Id.ShouldBe(9);
+        userQuestionsUpdate.Data[1].CorrectQid.ShouldBe(3);
+        userQuestionsUpdate.Data[1].Status.ShouldBe(UserQuestionStatusEnum.Noise);
+        userQuestionsUpdate.Data[1].Remark.ShouldBe("updated correcdQid 3 status noise");
         
-        userQuestionUpdate.Data[2].Id.ShouldBe(10);
-        userQuestionUpdate.Data[2].CorrectQid.ShouldBe(4);
-        userQuestionUpdate.Data[2].Status.ShouldBe(UserQuestionStatusEnum.Pending);
-        userQuestionUpdate.Data[2].Remark.ShouldBe("updated correcdQid 4 status pending");
+        userQuestionsUpdate.Data[2].Id.ShouldBe(10);
+        userQuestionsUpdate.Data[2].CorrectQid.ShouldBe(4);
+        userQuestionsUpdate.Data[2].Status.ShouldBe(UserQuestionStatusEnum.Pending);
+        userQuestionsUpdate.Data[2].Remark.ShouldBe("updated correcdQid 4 status pending");
         
-        userQuestionUpdate.Data[3].Id.ShouldBe(11);
-        userQuestionUpdate.Data[3].CorrectQid.ShouldBe(5);
-        userQuestionUpdate.Data[3].Status.ShouldBe(UserQuestionStatusEnum.ReadyToTrain);
-        userQuestionUpdate.Data[3].Remark.ShouldBe("updated correcdQid 5 status readyToTrain");
+        userQuestionsUpdate.Data[3].Id.ShouldBe(11);
+        userQuestionsUpdate.Data[3].CorrectQid.ShouldBe(5);
+        userQuestionsUpdate.Data[3].Status.ShouldBe(UserQuestionStatusEnum.ReadyToTrain);
+        userQuestionsUpdate.Data[3].Remark.ShouldBe("updated correcdQid 5 status readyToTrain");
         
-        userQuestionUpdate.Data[4].Id.ShouldBe(12);
-        userQuestionUpdate.Data[4].CorrectQid.ShouldBe(6);
-        userQuestionUpdate.Data[4].Status.ShouldBe(UserQuestionStatusEnum.Annoying);
-        userQuestionUpdate.Data[4].Remark.ShouldBe("updated correcdQid 6 status annoying");
+        userQuestionsUpdate.Data[4].Id.ShouldBe(12);
+        userQuestionsUpdate.Data[4].CorrectQid.ShouldBe(6);
+        userQuestionsUpdate.Data[4].Status.ShouldBe(UserQuestionStatusEnum.Annoying);
+        userQuestionsUpdate.Data[4].Remark.ShouldBe("updated correcdQid 6 status annoying");
     }
 }

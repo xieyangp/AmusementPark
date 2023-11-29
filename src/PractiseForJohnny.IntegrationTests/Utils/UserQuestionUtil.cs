@@ -2,10 +2,10 @@ using Autofac;
 using Mediator.Net;
 using PractiseForJohnny.Core.Data;
 using PractiseForJohnny.Core.Domain;
-using PractiseForJohnny.Message.Commands.UserQuestion;
 using PractiseForJohnny.Message.DTO;
 using PractiseForJohnny.Message.Enum;
 using PractiseForJohnny.Message.Requests;
+using PractiseForJohnny.Message.Commands.UserQuestion;
 
 namespace PractiseForJohnny.IntegarationTests.Utills;
 
@@ -37,27 +37,27 @@ public class UserQuestionUtil : TestUtil
         });
     }
 
-    public async Task<GetUserQuestionsForReviewResponse> GetUserQuestionsForReviewAsync(GetUserQuestionsRequest userQuestions)
+    public async Task<GetUserQuestionsForReviewResponse> GetUserQuestionsForReviewAsync(GetUserQuestionsForReviewRequest userQuestionsForReview)
     {
         return  await Run<IMediator, GetUserQuestionsForReviewResponse>(async mediator =>
         {
-            return await mediator.RequestAsync<GetUserQuestionsRequest, GetUserQuestionsForReviewResponse>(new GetUserQuestionsRequest
+            return await mediator.RequestAsync<GetUserQuestionsForReviewRequest, GetUserQuestionsForReviewResponse>(new GetUserQuestionsForReviewRequest
             {
-                skip = userQuestions.skip,
-                take = userQuestions.take,
-                sortField = userQuestions.sortField,
-                sortDirection = userQuestions.sortDirection,
-                status = userQuestions.status,
-                correct_qid = userQuestions.correct_qid
+                skip = userQuestionsForReview.skip,
+                take = userQuestionsForReview.take,
+                status = userQuestionsForReview.status,
+                sortField = userQuestionsForReview.sortField,
+                correct_qid = userQuestionsForReview.correct_qid,
+                sortDirection = userQuestionsForReview.sortDirection
             });
         });
     }
 
-    public async Task<UpdateUserQuestionResponse> UpdateUserQuestionsAsync(List<UpdateUserQuestionDto> UpdatedQuestions)
+    public async Task<UpdateUserQuestionsResponse> UpdateUserQuestionsAsync(List<UpdateUserQuestionDto> UpdatedQuestions)
     {
-        return await Run<IMediator, UpdateUserQuestionResponse>(async mediator =>
+        return await Run<IMediator, UpdateUserQuestionsResponse>(async mediator =>
         {
-            return await mediator.SendAsync<UpdateUserQuestionCommand, UpdateUserQuestionResponse>(new UpdateUserQuestionCommand
+            return await mediator.SendAsync<UpdateUserQuestionsCommand, UpdateUserQuestionsResponse>(new UpdateUserQuestionsCommand
             {
                 UpdatedQuestions = UpdatedQuestions
             });

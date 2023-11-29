@@ -12,6 +12,6 @@ public class UserQuestionMapping : Profile
 
         CreateMap<UserQuestionDto, UserQuestion>();
 
-        CreateMap<UpdateUserQuestionDto, UserQuestion>().ReverseMap();
+        CreateMap<UpdateUserQuestionDto, UserQuestion>();
     }
 }

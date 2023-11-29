@@ -5,7 +5,6 @@ using PractiseForJohnny.Message.Requests;
 
 namespace PractiseForJohnny.Api.Controllers;
 
-
 [ApiController]
 [Route("api/[controller]")]
 public class SmartFaqController : ControllerBase
@@ -19,18 +18,18 @@ public class SmartFaqController : ControllerBase
     
     [HttpPost]
     [Route("get")]
-    public async Task<IActionResult> GetUserQuestionsForReviewAsync([FromBody] GetUserQuestionsRequest command)
+    public async Task<IActionResult> GetUserQuestionsForReviewAsync([FromBody] GetUserQuestionsForReviewRequest command)
     {
-        var response = await _mediator.RequestAsync<GetUserQuestionsRequest, GetUserQuestionsForReviewResponse>(command);
+        var response = await _mediator.RequestAsync<GetUserQuestionsForReviewRequest, GetUserQuestionsForReviewResponse>(command);
 
         return Ok(response);
     }
 
     [HttpPost]
     [Route("update")]
-    public async Task<IActionResult> UpdateUserQuestions([FromBody] UpdateUserQuestionCommand command)
+    public async Task<IActionResult> UpdateUserQuestions([FromBody] UpdateUserQuestionsCommand command)
     {
-        var response = await _mediator.SendAsync<UpdateUserQuestionCommand, UpdateUserQuestionResponse>(command);
+        var response = await _mediator.SendAsync<UpdateUserQuestionsCommand, UpdateUserQuestionsResponse>(command);
 
         return Ok(response);
     }

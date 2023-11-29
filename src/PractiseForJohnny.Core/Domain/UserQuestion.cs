@@ -1,10 +1,7 @@
+using PractiseForJohnny.Message.Enum;
+using PractiseForJohnny.Message.Attributes;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Security.Principal;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using PractiseForJohnny.Message.Attributes;
-using PractiseForJohnny.Message.Enum;
 
 namespace PractiseForJohnny.Core.Domain;
 

@@ -5,7 +5,7 @@ using PractiseForJohnny.Message.Responses;
 
 namespace PractiseForJohnny.Message.Requests;
 
-public class GetUserQuestionsRequest : IRequest
+public class GetUserQuestionsForReviewRequest : IRequest
 {
     public int skip { get; set; }
 

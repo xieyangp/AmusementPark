@@ -4,12 +4,12 @@ using PractiseForJohnny.Message.Responses;
 
 namespace PractiseForJohnny.Message.Commands.UserQuestion;
 
-public class UpdateUserQuestionCommand : ICommand
+public class UpdateUserQuestionsCommand : ICommand
 {
     public List<UpdateUserQuestionDto> UpdatedQuestions { get; set; }
 }
 
-public class UpdateUserQuestionResponse : CommonResponse
+public class UpdateUserQuestionsResponse : CommonResponse
 {
     public List<UserQuestionDto> Data { get; set; }
 }

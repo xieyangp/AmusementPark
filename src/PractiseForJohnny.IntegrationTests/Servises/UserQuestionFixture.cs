@@ -1,11 +1,5 @@
-using System.Net;
-using PractiseForJohnny.Core.Data;
 using PractiseForJohnny.IntegarationTests.TestBaseClasses;
 using PractiseForJohnny.IntegarationTests.Utills;
-using PractiseForJohnny.Message.Enum;
-using PractiseForJohnny.Message.Requests;
-using Shouldly;
-using Xunit;
 
 namespace PractiseForJohnny.IntegarationTests.Servises;
 

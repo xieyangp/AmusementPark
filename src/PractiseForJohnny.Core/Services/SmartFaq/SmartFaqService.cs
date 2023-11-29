@@ -1,8 +1,8 @@
 using AutoMapper;
-using PractiseForJohnny.Message.Commands.UserQuestion;
 using PractiseForJohnny.Message.DTO;
-using PractiseForJohnny.Message.Events.UserQuestion;
 using PractiseForJohnny.Message.Requests;
+using PractiseForJohnny.Message.Commands.UserQuestion;
+using PractiseForJohnny.Message.Events.UserQuestion;
 
 namespace PractiseForJohnny.Core.Services.SmartFaq;
 
@@ -17,9 +17,9 @@ public class SmartFaqService : ISmartFaqService
         _smartFaqDataProvider = smartFaqDataProvider;
     }
 
-    public async Task<GetUserQuestionsForReviewResponse> GetUserQuestionsForReviewAsync(GetUserQuestionsRequest command, CancellationToken cancellationToken)
+    public async Task<GetUserQuestionsForReviewResponse> GetUserQuestionsForReviewAsync(GetUserQuestionsForReviewRequest command, CancellationToken cancellationToken)
     {
-        var (count, userQuestions) = await _smartFaqDataProvider.GetQuestions(command, cancellationToken);
+        var (count, userQuestions) = await _smartFaqDataProvider.GetUserQuestionsAsync(command, cancellationToken).ConfigureAwait(false);
 
         return new GetUserQuestionsForReviewResponse
         {
@@ -31,11 +31,11 @@ public class SmartFaqService : ISmartFaqService
         };
     }
     
-    public async Task<UserQuestionUpdateEvent> UpdateUserQuestionsAsync(UpdateUserQuestionCommand command, CancellationToken cancellationToken)
+    public async Task<UserQuestionUpdateEvent> UpdateUserQuestionsAsync(UpdateUserQuestionsCommand command, CancellationToken cancellationToken)
     {
         var userQuestionIds = command.UpdatedQuestions.Select(i => i.Id).ToList();
 
-        var userQuestions = await _smartFaqDataProvider.GetUserQuestionsAsync(userQuestionIds, cancellationToken);
+        var userQuestions = await _smartFaqDataProvider.GetUserQuestionsByIdsAsync(userQuestionIds, cancellationToken).ConfigureAwait(false);
 
         foreach (var userQuestion in userQuestions)
         {

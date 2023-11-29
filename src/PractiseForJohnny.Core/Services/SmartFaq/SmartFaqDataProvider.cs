@@ -1,16 +1,14 @@
-using System.Reflection;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
-using PractiseForJohnny.Core.Data;
-using PractiseForJohnny.Core.Domain;
-using PractiseForJohnny.Core.Extension;
+using System.Reflection;
 using PractiseForJohnny.Message;
-using PractiseForJohnny.Message.Attributes;
-using PractiseForJohnny.Message.Commands.UserQuestion;
-using PractiseForJohnny.Message.Requests;
+using PractiseForJohnny.Core.Data;
 using PractiseForJohnny.Message.DTO;
+using PractiseForJohnny.Core.Domain;
+using Microsoft.EntityFrameworkCore;
+using AutoMapper.QueryableExtensions;
+using PractiseForJohnny.Core.Extension;
+using PractiseForJohnny.Message.Requests;
+using PractiseForJohnny.Message.Attributes;
 
 namespace PractiseForJohnny.Core.Services.SmartFaq;
 
@@ -19,13 +17,13 @@ public class SmartFaqDataProvider : ISmartFaqDataProvider
     private readonly IMapper _mapper;
     private readonly IRepository _repository;
 
-    public SmartFaqDataProvider(IRepository repository, IMapper mapper)
+    public SmartFaqDataProvider(IMapper mapper, IRepository repository)
     {
         _mapper = mapper;
         _repository = repository;
     }
 
-    public async Task<(int Count, List<UserQuestionDto> UserQuestions)> GetQuestions(GetUserQuestionsRequest command, CancellationToken cancellationToken)
+    public async Task<(int Count, List<UserQuestionDto> UserQuestions)> GetUserQuestionsAsync(GetUserQuestionsForReviewRequest command, CancellationToken cancellationToken)
     {
         var query =  _repository.Query<UserQuestion>().Where(i => command.status == i.Status);
 
@@ -42,29 +40,18 @@ public class SmartFaqDataProvider : ISmartFaqDataProvider
             .ProjectTo<UserQuestionDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken)
             .ConfigureAwait(false);
-            
         
         return (count, userQustions);
     }
 
-    public async Task<List<UserQuestion>> GetUserQuestionsAsync(List<int> userQuestionIds, CancellationToken cancellationToken)
+    public async Task<List<UserQuestion>> GetUserQuestionsByIdsAsync(List<int> userQuestionIds, CancellationToken cancellationToken)
     {
         return await _repository.Query<UserQuestion>().Where(i => userQuestionIds.Contains(i.Id)).ToListAsync().ConfigureAwait(false);
     }
-
-    public async Task<List<UserQuestion>> DeleteUerQuestionsAsync(List<int> userQuestionIds, CancellationToken cancellationToken)
-    {
-        var userQuestions = _repository.Query<UserQuestion>().Where(i => userQuestionIds.Contains(i.Id));
-
-        await _repository.DeleteAllAsync(userQuestions).ConfigureAwait(false);
-
-        return await userQuestions.ToListAsync();
-    }
-
+    
     public async Task UpdateUserQuestionsAsync(List<UserQuestion> userQuestions, CancellationToken cancellationToken)
     {
        await _repository.UpdateAllAsync(userQuestions, cancellationToken).ConfigureAwait(false);
-
     }
 
     private IQueryable<UserQuestion> GenerateUserQuestionsSorting(IQueryable<UserQuestion> query, string sortField, string sortDirection)

@@ -43,8 +43,8 @@ public class Startup
         
         app.UseRouting();
         
-        app.UseHangfireServer();//启动hangfire服务
-        app.UseHangfireDashboard();//启动hangfire面板
+        app.UseHangfireServer();
+        app.UseHangfireDashboard();
         
         app.UseSwagger();
         app.UseSwaggerUI(c =>

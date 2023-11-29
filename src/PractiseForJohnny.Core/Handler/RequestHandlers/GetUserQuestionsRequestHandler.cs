@@ -5,7 +5,7 @@ using PractiseForJohnny.Message.Requests;
 
 namespace PractiseForJohnny.Core.Handler.RequestHandlers;
 
-public class GetUserQuestionsRequestHandler : IRequestHandler<GetUserQuestionsRequest, GetUserQuestionsForReviewResponse>
+public class GetUserQuestionsRequestHandler : IRequestHandler<GetUserQuestionsForReviewRequest, GetUserQuestionsForReviewResponse>
 {
     private readonly ISmartFaqService _smartFaqService;
 
@@ -14,7 +14,7 @@ public class GetUserQuestionsRequestHandler : IRequestHandler<GetUserQuestionsRe
         _smartFaqService = smartFaqService;
     }
 
-    public async Task<GetUserQuestionsForReviewResponse> Handle(IReceiveContext<GetUserQuestionsRequest> context, CancellationToken cancellationToken)
+    public async Task<GetUserQuestionsForReviewResponse> Handle(IReceiveContext<GetUserQuestionsForReviewRequest> context, CancellationToken cancellationToken)
     {
         return await _smartFaqService.GetUserQuestionsForReviewAsync(context.Message, cancellationToken).ConfigureAwait(false);
     }

@@ -1,7 +1,7 @@
+using Xunit;
+using Shouldly;
 using PractiseForJohnny.Message.Enum;
 using PractiseForJohnny.Message.Requests;
-using Shouldly;
-using Xunit;
 
 namespace PractiseForJohnny.IntegarationTests.Servises;
 
@@ -18,7 +18,7 @@ public partial class UserQuestionFixture
         await _userQuestionUtil.AddUserQuestionsAsync(6, 1, UserQuestionStatusEnum.Comeback);
         await _userQuestionUtil.AddUserQuestionsAsync(7, 1, UserQuestionStatusEnum.Pending);
         
-        var request = new GetUserQuestionsRequest
+        var request = new GetUserQuestionsForReviewRequest
         {
             skip = 0,
             take = 10,
