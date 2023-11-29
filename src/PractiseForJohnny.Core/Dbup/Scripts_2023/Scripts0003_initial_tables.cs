@@ -5,7 +5,6 @@ namespace PractiseForJohnny.Core.Dbup;
 
 public class Scripts0003_initial_tables : IScript
 {
-   
     public string ProvideScript(Func<IDbCommand> dbCommandFactory)
     {
         return @"create table if not exists user_question

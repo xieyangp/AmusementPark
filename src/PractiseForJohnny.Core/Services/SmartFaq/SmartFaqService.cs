@@ -17,9 +17,9 @@ public class SmartFaqService : ISmartFaqService
         _smartFaqDataProvider = smartFaqDataProvider;
     }
 
-    public async Task<GetUserQuestionsForReviewResponse> GetUserQuestionsForReviewAsync(GetUserQuestionsForReviewRequest command, CancellationToken cancellationToken)
+    public async Task<GetUserQuestionsForReviewResponse> GetUserQuestionsForReviewAsync(GetUserQuestionsForReviewRequest request, CancellationToken cancellationToken)
     {
-        var (count, userQuestions) = await _smartFaqDataProvider.GetUserQuestionsAsync(command, cancellationToken).ConfigureAwait(false);
+        var (count, userQuestions) = await _smartFaqDataProvider.GetUserQuestionsAsync(request, cancellationToken).ConfigureAwait(false);
 
         return new GetUserQuestionsForReviewResponse
         {

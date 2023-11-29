@@ -7,7 +7,7 @@ namespace PractiseForJohnny.Core.Services.SmartFaq;
 
 public interface ISmartFaqDataProvider : IService
 {
-    Task<(int Count, List<UserQuestionDto> UserQuestions)> GetUserQuestionsAsync(GetUserQuestionsForReviewRequest command, CancellationToken cancellationToken);
+    Task<(int Count, List<UserQuestionDto> UserQuestions)> GetUserQuestionsAsync(GetUserQuestionsForReviewRequest request, CancellationToken cancellationToken);
 
     Task UpdateUserQuestionsAsync(List<UserQuestion> userQuestions, CancellationToken cancellationToken);
 

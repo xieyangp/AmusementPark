@@ -23,20 +23,20 @@ public class SmartFaqDataProvider : ISmartFaqDataProvider
         _repository = repository;
     }
 
-    public async Task<(int Count, List<UserQuestionDto> UserQuestions)> GetUserQuestionsAsync(GetUserQuestionsForReviewRequest command, CancellationToken cancellationToken)
+    public async Task<(int Count, List<UserQuestionDto> UserQuestions)> GetUserQuestionsAsync(GetUserQuestionsForReviewRequest request, CancellationToken cancellationToken)
     {
-        var query =  _repository.Query<UserQuestion>().Where(i => command.status == i.Status);
+        var query =  _repository.Query<UserQuestion>().Where(i => request.status == i.Status);
 
-        if (command.correct_qid != null)
-            query = query.Where(i => i.CorrectQid == command.correct_qid);
+        if (request.correct_qid != null)
+            query = query.Where(i => i.CorrectQid == request.correct_qid);
 
         var count = await query.CountAsync(cancellationToken).ConfigureAwait(false);
 
-        query = GenerateUserQuestionsSorting(query, command.sortField, command.sortDirection);
+        query = GenerateUserQuestionsSorting(query, request.sortField, request.sortDirection);
 
         var userQustions = await query
-            .Skip(command.skip)
-            .Take(command.take)
+            .Skip(request.skip)
+            .Take(request.take)
             .ProjectTo<UserQuestionDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken)
             .ConfigureAwait(false);

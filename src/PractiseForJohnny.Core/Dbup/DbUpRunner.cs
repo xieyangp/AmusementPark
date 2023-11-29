@@ -6,7 +6,7 @@ public class DbUpRunner
 {
     private readonly string _connectionString;
 
-    public DbUpRunner(string connectionString) 
+    public DbUpRunner(string connectionString)
     {
         _connectionString = connectionString;
     }

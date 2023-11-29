@@ -6,7 +6,7 @@ namespace PractiseForJohnny.Core.Services.SmartFaq;
 
 public interface ISmartFaqService : IService
 {
-    Task<GetUserQuestionsForReviewResponse> GetUserQuestionsForReviewAsync(GetUserQuestionsForReviewRequest command, CancellationToken cancellationToken);
+    Task<GetUserQuestionsForReviewResponse> GetUserQuestionsForReviewAsync(GetUserQuestionsForReviewRequest request, CancellationToken cancellationToken);
     
     Task<UserQuestionUpdateEvent> UpdateUserQuestionsAsync(UpdateUserQuestionsCommand command, CancellationToken cancellationToken);
 }
