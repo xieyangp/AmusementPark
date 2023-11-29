@@ -1,7 +1,5 @@
 using Mediator.Net;
-using Mediator.Net.Contracts;
 using Microsoft.AspNetCore.Mvc;
-using PractiseForJohnny.Core.Data;
 using PractiseForJohnny.Message.Commands;
 using PractiseForJohnny.Message.Requests;
 
