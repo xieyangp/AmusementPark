@@ -24,7 +24,7 @@ public class SmartFaqController : ControllerBase
         return Ok(response);
     }
     
-    [Route("faqs/update/question"), HttpPost]
+    [Route("faqs/correct"), HttpPost]
     public async Task<IActionResult> UpdateUserQuestions([FromBody] UpdateUserQuestionsCommand command)
     {
         var response = await _mediator.SendAsync<UpdateUserQuestionsCommand, UpdateUserQuestionsResponse>(command).ConfigureAwait(false);
