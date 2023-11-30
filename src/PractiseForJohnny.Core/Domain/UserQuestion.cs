@@ -8,6 +8,12 @@ namespace PractiseForJohnny.Core.Domain;
 [Table("user_question")]
 public class UserQuestion : IEntity
 {
+    public UserQuestion()
+    {
+        Status = UserQuestionStatusEnum.Pending;
+        CreatedAt = DateTimeOffset.Now.ToUnixTimeSeconds();
+    }
+    
     [Key]
     [Column("id")]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -16,7 +22,7 @@ public class UserQuestion : IEntity
     
     [Column("created_at")]
     [SortColumn("CreatedAt", "created_at")]
-    public int CreatedAt { get; set; }
+    public long CreatedAt { get; set; }
 
     [Column("question")]
     [SortColumn("Question", "question")]
