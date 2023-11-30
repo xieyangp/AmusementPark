@@ -3,7 +3,7 @@ create table if not exists foods
     Id int not null primary key auto_increment,
     name varchar(50) not null,
     color varchar(10) not null
-) charset = utf8mb4;
+)charset=utf8mb4;
 
 create table if not exists user_question
 (
@@ -20,4 +20,4 @@ create table if not exists user_question
     status int default 0 null,
     remark varchar(512) charset utf8 null,
     ask_by varchar(128) charset utf8 null
-    )charset=utf8mb4;
+)charset=utf8mb4;
