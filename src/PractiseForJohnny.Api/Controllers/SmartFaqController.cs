@@ -16,17 +16,15 @@ public class SmartFaqController : ControllerBase
         _mediator = mediator;
     }
     
-    [HttpPost]
-    [Route("faq/review")]
-    public async Task<IActionResult> GetUserQuestionsForReviewAsync([FromBody] GetUserQuestionsForReviewRequest request)
+    [Route("faqs/review"), HttpGet]
+    public async Task<IActionResult> GetUserQuestionsForReviewAsync([FromQuery] GetUserQuestionsForReviewRequest request)
     {
         var response = await _mediator.RequestAsync<GetUserQuestionsForReviewRequest, GetUserQuestionsForReviewResponse>(request).ConfigureAwait(false);
 
         return Ok(response);
     }
-
-    [HttpPost]
-    [Route("faq/update/question")]
+    
+    [Route("faqs/update/question"), HttpPost]
     public async Task<IActionResult> UpdateUserQuestions([FromBody] UpdateUserQuestionsCommand command)
     {
         var response = await _mediator.SendAsync<UpdateUserQuestionsCommand, UpdateUserQuestionsResponse>(command).ConfigureAwait(false);

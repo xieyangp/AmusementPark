@@ -1,8 +1,6 @@
 using Autofac;
-using Hangfire;
 using Microsoft.OpenApi.Models;
 using PractiseForJohnny.Core.Service;
-using PractiseForJohnny.Core.Hangfire;
 
 namespace PractiseForJohnny.Api;
 
@@ -25,8 +23,6 @@ public class Startup
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "PractiseForJohnny", Version = "v1" });
         });
-
-        services.AddHangFireService(Configuration);
     }
     
     public void ConfigureContainer(ContainerBuilder builder)
@@ -42,9 +38,6 @@ public class Startup
         }
         
         app.UseRouting();
-        
-        app.UseHangfireServer();
-        app.UseHangfireDashboard();
         
         app.UseSwagger();
         app.UseSwaggerUI(c =>
