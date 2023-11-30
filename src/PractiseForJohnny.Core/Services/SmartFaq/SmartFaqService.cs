@@ -17,7 +17,8 @@ public class SmartFaqService : ISmartFaqService
         _smartFaqDataProvider = smartFaqDataProvider;
     }
 
-    public async Task<GetUserQuestionsForReviewResponse> GetUserQuestionsForReviewAsync(GetUserQuestionsForReviewRequest request, CancellationToken cancellationToken)
+    public async Task<GetUserQuestionsForReviewResponse> GetUserQuestionsForReviewAsync(
+        GetUserQuestionsForReviewRequest request, CancellationToken cancellationToken)
     {
         var (count, userQuestions) = await _smartFaqDataProvider.GetUserQuestionsAsync(request, cancellationToken).ConfigureAwait(false);
 
@@ -30,8 +31,9 @@ public class SmartFaqService : ISmartFaqService
             }
         };
     }
-    
-    public async Task<UserQuestionUpdateEvent> UpdateUserQuestionsAsync(UpdateUserQuestionsCommand command, CancellationToken cancellationToken)
+
+    public async Task<UserQuestionUpdateEvent> UpdateUserQuestionsAsync(UpdateUserQuestionsCommand command,
+        CancellationToken cancellationToken)
     {
         if (!command.UpdatedQuestions.Any()) return new UserQuestionUpdateEvent();
         

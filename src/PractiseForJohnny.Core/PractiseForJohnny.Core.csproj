@@ -29,9 +29,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="DbUp\*\*.sql">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
+        <EmbeddedResource Include="DbUp\**\*.sql" />
     </ItemGroup>
     
     <ItemGroup>

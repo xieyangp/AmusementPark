@@ -15,9 +15,9 @@ public class UserQuestionUtil : TestUtil
     {
     }
 
-    public async Task AddUserQuestionsAsync(int id, int correctQid, UserQuestionStatusEnum status, string? remark = null,
-        string? question = null, int? rasaPredictedQid = null, float? rasaConfidence = null, int? anygPredictedQid = null, 
-        float? model3Confidence = null, string? askBy = null)
+    public async Task AddUserQuestionsAsync(int id, int correctQid, UserQuestionStatusEnum status,string? remark = null,
+        string? question = null, int? rasaPredictedQid = null, float? rasaConfidence = null, string? askBy = null,
+        int? anygPredictedQid = null, float? model3Confidence = null)
     {
         await RunWithUnitOfWork<IRepository>(async repository =>
         {
@@ -39,7 +39,7 @@ public class UserQuestionUtil : TestUtil
 
     public async Task<GetUserQuestionsForReviewResponse> GetUserQuestionsForReviewAsync(GetUserQuestionsForReviewRequest userQuestionsForReview)
     {
-        return  await Run<IMediator, GetUserQuestionsForReviewResponse>(async mediator =>
+        return await Run<IMediator, GetUserQuestionsForReviewResponse>(async mediator =>
         {
             return await mediator.RequestAsync<GetUserQuestionsForReviewRequest, GetUserQuestionsForReviewResponse>(new GetUserQuestionsForReviewRequest
             {

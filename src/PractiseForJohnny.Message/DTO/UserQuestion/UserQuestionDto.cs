@@ -6,7 +6,7 @@ public class UserQuestionDto
 {
     public int Id { get; set; }
 
-    public int CreatedAt { get; set; }
+    public long CreatedAt { get; set; }
 
     public string Question { get; set; }
 

@@ -23,7 +23,8 @@ public class SmartFaqDataProvider : ISmartFaqDataProvider
         _repository = repository;
     }
 
-    public async Task<(int Count, List<UserQuestionDto> UserQuestions)> GetUserQuestionsAsync(GetUserQuestionsForReviewRequest request, CancellationToken cancellationToken)
+    public async Task<(int Count, List<UserQuestionDto> UserQuestions)> GetUserQuestionsAsync(
+        GetUserQuestionsForReviewRequest request, CancellationToken cancellationToken)
     {
         var query =  _repository.Query<UserQuestion>().Where(i => request.status == i.Status);
 
@@ -44,7 +45,8 @@ public class SmartFaqDataProvider : ISmartFaqDataProvider
         return (count, userQustions);
     }
 
-    public async Task<List<UserQuestion>> GetUserQuestionsByIdsAsync(List<int> userQuestionIds, CancellationToken cancellationToken)
+    public async Task<List<UserQuestion>> GetUserQuestionsByIdsAsync(List<int> userQuestionIds,
+        CancellationToken cancellationToken)
     {
         return await _repository.Query<UserQuestion>()
             .Where(i => userQuestionIds.Contains(i.Id))
@@ -57,7 +59,8 @@ public class SmartFaqDataProvider : ISmartFaqDataProvider
        await _repository.UpdateAllAsync(userQuestions, cancellationToken).ConfigureAwait(false);
     }
 
-    private IQueryable<UserQuestion> GenerateUserQuestionsSorting(IQueryable<UserQuestion> query, string sortField, string sortDirection)
+    private IQueryable<UserQuestion> GenerateUserQuestionsSorting(IQueryable<UserQuestion> query, string sortField,
+        string sortDirection)
     {
         var sortPropertyName = FindSortPropertyNameBySortField(sortField);
 
