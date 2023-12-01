@@ -51,4 +51,31 @@ public class FoodsController : ControllerBase
 
         return Ok(result);
     }
+
+    [HttpPost]
+    [Route("delay/create/food")]
+    public async Task<IActionResult> DelayCreateFoodAsync([FromBody] DelayCreateFoodCommand command)
+    {
+        await _mediator.SendAsync(command).ConfigureAwait(false);
+
+        return Ok();
+    }
+
+    [HttpPost]
+    [Route("recurring/update/food")]
+    public async Task<IActionResult> RecurringUpdateFoodAsync([FromBody] RecurringUpdateFoodCommand command)
+    {
+        await _mediator.SendAsync(command).ConfigureAwait(false);
+        
+        return Ok();
+    }
+
+    [HttpPost]
+    [Route("schedule/update/food")]
+    public async Task<IActionResult> ScheduleUpdateFoodAsync([FromBody] ScheduleUpdateFoodCommand command)
+    {
+        await _mediator.SendAsync(command).ConfigureAwait(false);
+
+        return Ok();
+    }
 }

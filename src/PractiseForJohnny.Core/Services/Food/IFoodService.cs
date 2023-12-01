@@ -16,4 +16,10 @@ public interface IFoodService : IScopedDependency
     Task<FoodDeletedEvent> DeleteFoodAsync(DeleteFoodCommand command, CancellationToken cancellationToken);
 
     Task<OutFoodDto> GetFoodAsync(GetFoodRequest request, CancellationToken cancellationToken);
+
+    Task DelayCreateFood(DelayCreateFoodCommand command, CancellationToken cancellationToken);
+
+    Task RecurringUpdateFood(RecurringUpdateFoodCommand command, CancellationToken cancellationToken);
+
+    Task ScheduleUpdateFood(ScheduleUpdateFoodCommand command, CancellationToken cancellationToken);
 }
