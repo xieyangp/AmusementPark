@@ -13,6 +13,7 @@
       <PackageReference Include="AutoMapper.Contrib.Autofac.DependencyInjection" Version="7.2.0" />
       <PackageReference Include="dbup-core" Version="5.0.10" />
       <PackageReference Include="dbup-mysql" Version="5.0.10" />
+      <PackageReference Include="dbup-sqlserver" Version="5.0.8" />
       <PackageReference Include="Mediator.Net" Version="4.8.0" />
       <PackageReference Include="Mediator.Net.Autofac" Version="4.8.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.11" />
@@ -25,9 +26,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="DbUp\*\*.sql">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
+        <EmbeddedResource Include="DbUp\**\*.sql" />
     </ItemGroup>
     
     <ItemGroup>

@@ -1,7 +1,5 @@
 using Autofac;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using PractiseForJohnny.Core.Data;
 using PractiseForJohnny.Core.Service;
 
 namespace PractiseForJohnny.Api;

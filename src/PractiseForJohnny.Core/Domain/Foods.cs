@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PractiseForJohnny.Core.Domain;
 
-[Table("Foods")]
+[Table("foods")]
 public class Foods : IEntity
 {
     [Key] 

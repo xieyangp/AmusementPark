@@ -1,6 +1,4 @@
 using DbUp;
-using DbUp.Engine;
-using DbUp.ScriptProviders;
 
 namespace PractiseForJohnny.Core.Dbup;
 
@@ -16,9 +14,9 @@ public class DbUpRunner
     public void Run()
     {
         EnsureDatabase.For.MySqlDatabase(_connectionString);
-
+        
         var upgradeEngine = DeployChanges.To.MySqlDatabase(_connectionString)
-            .WithScriptsAndCodeEmbeddedInAssembly(typeof(DbUpRunner).Assembly, s => s.EndsWith(".cs"))
+            .WithScriptsEmbeddedInAssembly(typeof(DbUpRunner).Assembly)
             .WithTransaction()
             .LogToAutodetectedLog()
             .LogToConsole()
