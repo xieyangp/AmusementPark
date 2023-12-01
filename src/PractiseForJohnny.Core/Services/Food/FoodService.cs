@@ -15,25 +15,24 @@ public class FoodService : IFoodService
 {
     private readonly IMapper _mapper;
     private readonly IFoodDataProvider _foodDataProvider;
-    private readonly IBackgroundJobClient _backgroundJobClient;
     private readonly UpdateFoodJobCron _updateFoodJobCron;
+    private readonly IBackgroundJobClient _backgroundJobClient;
 
     public FoodService(
         IMapper mapper,
         IFoodDataProvider foodDataProvider,
-        IBackgroundJobClient backgroundJobClient,
-        UpdateFoodJobCron updateFoodJobCron)
+        UpdateFoodJobCron updateFoodJobCron,
+        IBackgroundJobClient backgroundJobClient)
     {
         _mapper = mapper;
         _foodDataProvider = foodDataProvider;
-        _backgroundJobClient = backgroundJobClient;
         _updateFoodJobCron = updateFoodJobCron;
+        _backgroundJobClient = backgroundJobClient;
     }
 
     public async Task<FoodCreatedEvent> CreateFoodAsync(CreateFoodCommand command, CancellationToken cancellationToken)
     {
-        var food = await _foodDataProvider.CreatedFoodAsync(_mapper.Map<Foods>(command.Food), cancellationToken)
-            .ConfigureAwait(false);
+        var food = await _foodDataProvider.CreatedFoodAsync(_mapper.Map<Foods>(command.Food), cancellationToken).ConfigureAwait(false);
 
         return new FoodCreatedEvent
         {
