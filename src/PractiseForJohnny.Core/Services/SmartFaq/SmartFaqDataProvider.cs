@@ -59,8 +59,7 @@ public class SmartFaqDataProvider : ISmartFaqDataProvider
        await _repository.UpdateAllAsync(userQuestions, cancellationToken).ConfigureAwait(false);
     }
 
-    private IQueryable<UserQuestion> GenerateUserQuestionsSorting(IQueryable<UserQuestion> query, string sortField,
-        string sortDirection)
+    private IQueryable<UserQuestion> GenerateUserQuestionsSorting(IQueryable<UserQuestion> query, string sortField, string sortDirection)
     {
         var sortPropertyName = FindSortPropertyNameBySortField(sortField);
 
