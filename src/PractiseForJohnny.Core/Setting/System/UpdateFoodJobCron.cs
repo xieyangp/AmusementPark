@@ -6,7 +6,7 @@ public class UpdateFoodJobCron : IConfiguartionSetting<string>
 {
     public UpdateFoodJobCron(IConfiguration configuration)
     {
-        Value = configuration["UpdateFoodJobCron:Cron"];
+        Value = configuration["SchedulingUpdateFoodJobCronExpression"];
     }
     
     public string Value { get; set; }
