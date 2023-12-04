@@ -74,7 +74,8 @@ public class FoodService : IFoodService
     
     public void RecurringUpdateFood(RecurringUpdateFoodCommand command, CancellationToken cancellationToken)
     {
-        _johnnyBackgroundJobClient.AddOrUpdateRecurringJob<IFoodDataProvider>("updateFoodRecurringJob" + command.Food.Id, i => 
+        _johnnyBackgroundJobClient.AddOrUpdateRecurringJob<IFoodDataProvider>(
+            "updateFoodRecurringJob" + command.Food.Id, i => 
             i.UpdateFoodAsync(_mapper.Map<UpdateFoodDto>(command.Food), CancellationToken.None),
             _updateFoodJobCron.Value, TimeZoneInfo.FindSystemTimeZoneById("China Standard Time"));
     }
@@ -82,6 +83,7 @@ public class FoodService : IFoodService
     public void ScheduleUpdateFood(ScheduleUpdateFoodCommand command, CancellationToken cancellationToken)
     {
         _johnnyBackgroundJobClient.Schedule<IFoodDataProvider>(i => 
-                i.UpdateFoodAsync(_mapper.Map<UpdateFoodDto>(command.Food), CancellationToken.None), TimeSpan.FromMinutes(1));
+                 i.UpdateFoodAsync(_mapper.Map<UpdateFoodDto>(command.Food), CancellationToken.None), 
+            TimeSpan.FromMinutes(1));
     }
 }
