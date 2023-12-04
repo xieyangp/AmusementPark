@@ -33,6 +33,8 @@ public class FoodDataProvider : IFoodDataProvider
         var outfood = _mapper.Map<Foods>(food);
 
         await _repository.UpdateAsync(outfood, cancellationToken).ConfigureAwait(false);
+        
+        await _unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 
         return outfood;
     }

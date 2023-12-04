@@ -1,5 +1,7 @@
 using Autofac;
+using Hangfire;
 using Microsoft.OpenApi.Models;
+using PractiseForJohnny.Core.Hangfire;
 using PractiseForJohnny.Core.Service;
 
 namespace PractiseForJohnny.Api;
@@ -18,6 +20,8 @@ public class Startup
         services.AddMvc();
 
         services.AddControllers();
+        
+        services.AddHangFireService(Configuration);
         
         services.AddSwaggerGen(c =>
         {
@@ -38,6 +42,9 @@ public class Startup
         }
         
         app.UseRouting();
+        
+        app.UseHangfireServer();
+        app.UseHangfireDashboard();
         
         app.UseSwagger();
         app.UseSwaggerUI(c =>

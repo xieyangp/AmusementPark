@@ -1,7 +1,8 @@
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using PractiseForJohnny.Core.Data;
+using Hangfire;
 using PractiseForJohnny.Core.Domain;
+using PractiseForJohnny.Core.Services.Jobs;
+using PractiseForJohnny.Core.Setting.System;
 using PractiseForJohnny.Message.Commands;
 using PractiseForJohnny.Message.DTO;
 using PractiseForJohnny.Message.Events;
@@ -13,11 +14,19 @@ public class FoodService : IFoodService
 {
     private readonly IMapper _mapper;
     private readonly IFoodDataProvider _foodDataProvider;
+    private readonly UpdateFoodJobCron _updateFoodJobCron;
+    private readonly IJohnnyBackgroundJobClient _johnnyBackgroundJobClient;
 
-    public FoodService(IMapper mapper, IFoodDataProvider foodDataProvider)
+    public FoodService(
+        IMapper mapper,
+        IFoodDataProvider foodDataProvider,
+        UpdateFoodJobCron updateFoodJobCron,
+        IJohnnyBackgroundJobClient johnnyBackgroundJobClient)
     {
         _mapper = mapper;
         _foodDataProvider = foodDataProvider;
+        _updateFoodJobCron = updateFoodJobCron;
+        _johnnyBackgroundJobClient = johnnyBackgroundJobClient;
     }
 
     public async Task<FoodCreatedEvent> CreateFoodAsync(CreateFoodCommand command, CancellationToken cancellationToken)
@@ -55,5 +64,26 @@ public class FoodService : IFoodService
         var food = await _foodDataProvider.GetFoodAsync(request.Food, cancellationToken);
 
         return _mapper.Map<OutFoodDto>(food);
+    }
+
+    public void DelayCreateFood(DelayCreateFoodCommand command, CancellationToken cancellationToken)
+    {
+        _johnnyBackgroundJobClient.Enqueue<IFoodDataProvider>(i =>
+            i.CreatedFoodAsync(_mapper.Map<Foods>(command.Food), CancellationToken.None));
+    }
+    
+    public void RecurringUpdateFood(RecurringUpdateFoodCommand command, CancellationToken cancellationToken)
+    {
+        _johnnyBackgroundJobClient.AddOrUpdateRecurringJob<IFoodDataProvider>(
+            "updateFoodRecurringJob" + command.Food.Id, i => 
+            i.UpdateFoodAsync(_mapper.Map<UpdateFoodDto>(command.Food), CancellationToken.None),
+            _updateFoodJobCron.Value, TimeZoneInfo.FindSystemTimeZoneById("China Standard Time"));
+    }
+    
+    public void ScheduleUpdateFood(ScheduleUpdateFoodCommand command, CancellationToken cancellationToken)
+    {
+        _johnnyBackgroundJobClient.Schedule<IFoodDataProvider>(i => 
+                i.UpdateFoodAsync(_mapper.Map<UpdateFoodDto>(command.Food), CancellationToken.None), 
+                TimeSpan.FromMinutes(1));
     }
 }
