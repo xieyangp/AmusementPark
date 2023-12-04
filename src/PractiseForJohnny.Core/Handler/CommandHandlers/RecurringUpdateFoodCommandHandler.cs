@@ -14,8 +14,10 @@ public class RecurringUpdateFoodCommandHandler : ICommandHandler<RecurringUpdate
         _foodService = foodService;
     }
 
-    public async Task Handle(IReceiveContext<RecurringUpdateFoodCommand> context, CancellationToken cancellationToken)
+    public Task Handle(IReceiveContext<RecurringUpdateFoodCommand> context, CancellationToken cancellationToken)
     {
-        await _foodService.RecurringUpdateFood(context.Message, cancellationToken);
+        _foodService.RecurringUpdateFood(context.Message, cancellationToken);
+
+        return Task.CompletedTask;
     }
 }

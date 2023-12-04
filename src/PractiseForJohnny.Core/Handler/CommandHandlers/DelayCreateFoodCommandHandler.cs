@@ -15,8 +15,10 @@ public class DelayCreateFoodCommandHandler : ICommandHandler<DelayCreateFoodComm
         _foodService = foodService;
     }
 
-    public async Task Handle(IReceiveContext<DelayCreateFoodCommand> context, CancellationToken cancellationToken)
+    public Task Handle(IReceiveContext<DelayCreateFoodCommand> context, CancellationToken cancellationToken)
     {
-        await _foodService.DelayCreateFood(context.Message, cancellationToken);
+        _foodService.DelayCreateFood(context.Message, cancellationToken);
+
+        return Task.CompletedTask;
     }
 }

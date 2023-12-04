@@ -18,16 +18,15 @@ public static class HangFireExtension
                     configuration.GetConnectionString("Default"),
                     new MySqlStorageOptions
                     {
-                        QueuePollInterval = TimeSpan.FromSeconds(10),
                         JobExpirationCheckInterval = TimeSpan.FromHours(1),
                         CountersAggregateInterval = TimeSpan.FromMinutes(5),
                         DashboardJobListLimit = 25000,
                         TransactionTimeout = TimeSpan.FromMilliseconds(1),
-                        TablesPrefix = "Hangfire"
+                        TablesPrefix = "Hangfire",
                     }
                 )
             ));
-        
+
         services.AddHangfireServer(options => options.WorkerCount = 1);
     }
 }

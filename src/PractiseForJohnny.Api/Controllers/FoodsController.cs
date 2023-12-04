@@ -1,3 +1,4 @@
+using Hangfire;
 using Mediator.Net;
 using Microsoft.AspNetCore.Mvc;
 using PractiseForJohnny.Message.Commands;

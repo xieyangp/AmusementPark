@@ -13,9 +13,11 @@ public class ScheduleUpdateFoodCommandHandler : ICommandHandler<ScheduleUpdateFo
     {
         _foodService = foodService;
     }
-    
-    public async Task Handle(IReceiveContext<ScheduleUpdateFoodCommand> context, CancellationToken cancellationToken)
+
+    public Task Handle(IReceiveContext<ScheduleUpdateFoodCommand> context, CancellationToken cancellationToken)
     {
-        await _foodService.ScheduleUpdateFood(context.Message, cancellationToken);
+        _foodService.ScheduleUpdateFood(context.Message, cancellationToken);
+
+        return Task.CompletedTask;
     }
 }
