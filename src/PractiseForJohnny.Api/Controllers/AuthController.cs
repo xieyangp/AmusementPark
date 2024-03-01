@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using PractiseForJohnny.Core.Auth;
-using PractiseForJohnny.Core.Domain.Dto;
+using PractiseForJohnny.Message.DTO.Auth;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
