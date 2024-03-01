@@ -1,6 +1,7 @@
 using Autofac;
 using Hangfire;
 using Microsoft.OpenApi.Models;
+using PractiseForJohnny.Core.Extension;
 using PractiseForJohnny.Core.Hangfire;
 using PractiseForJohnny.Core.Service;
 
@@ -18,6 +19,8 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddMvc();
+
+        services.AddJWT(Configuration);
 
         services.AddControllers();
         
