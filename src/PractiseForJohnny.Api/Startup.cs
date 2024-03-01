@@ -18,8 +18,6 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddMvc();
-
         services.AddJWT(Configuration);
 
         services.AddControllers();
@@ -46,6 +44,10 @@ public class Startup
         
         app.UseRouting();
         
+        app.UseAuthentication();
+
+        app.UseAuthorization();
+
         app.UseHangfireServer();
         app.UseHangfireDashboard();
         
