@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PractiseForJohnny.Core.Service;
 
@@ -5,6 +6,7 @@ namespace PractiseForJohnny.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class HelloWordController : ControllerBase
 {
     private readonly IHelloWordService _helloWordService;
