@@ -23,7 +23,7 @@ public class AccountService : IAccountService
 
         return new LoginResponse
         {
-            Data = _tokenProvider.Genrate(_accountDataService.g)
+            Data = _tokenProvider.Genrate(_accountDataService.GenerateClaimsFromUserAccount(account))
         };
     }
 }
