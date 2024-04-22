@@ -8,6 +8,9 @@
 
     <ItemGroup>
       <PackageReference Include="Mediator.Net" Version="4.8.0" />
+      <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="7.0.0" />
+      <PackageReference Include="RedLock.net" Version="2.3.2" />
+      <PackageReference Include="StackExchange.Redis" Version="2.6.104" />
     </ItemGroup>
 
 </Project>
