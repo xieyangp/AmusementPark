@@ -9,6 +9,7 @@ using PractiseForJohnny.Core.Data;
 using PractiseForJohnny.Core.MiddleWares.UnifyResponse;
 using PractiseForJohnny.Core.MiddleWares.UnitOfWork;
 using PractiseForJohnny.Core.Services;
+using PractiseForJohnny.Core.Services.Caching;
 using PractiseForJohnny.Core.Setting;
 using Module = Autofac.Module;
 
@@ -36,6 +37,8 @@ public class PractiseForJohnnyModule : Module
         RegisterSettings(builder);
 
         RegisterAutoMapping(builder);
+        
+        RegisterCaching(builder);
     }
     
     private void RegisterDependency(ContainerBuilder builder)
@@ -74,6 +77,15 @@ public class PractiseForJohnnyModule : Module
         });
 
         builder.RegisterMediator(mediatorBuidler);
+    }
+    
+    private void RegisterCaching(ContainerBuilder builder)
+    {
+        builder.Register(cfx =>
+        {
+            var pool = cfx.Resolve<IRedisConnectionPool>();
+            return pool.GetConnection();
+        }).ExternallyOwned();
     }
     
     private void RegisterDbContext(ContainerBuilder builder)

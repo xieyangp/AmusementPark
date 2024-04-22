@@ -1,6 +1,6 @@
 namespace PractiseForJohnny.Core.Services.Caching;
 
-public interface ICachingService
+public interface ICachingService : IScopedDependency
 {
     Task<T> GetAsync<T>(string key, CancellationToken cancellationToken = default) where T : class;
 
