@@ -1,0 +1,24 @@
+FROM registry.cn-guangzhou.aliyuncs.com/supermanxyp/sdk:7.0 AS build-env
+
+USER root
+
+WORKDIR /app
+EXPOSE 8080
+EXPOSE 443
+
+COPY ./src/PractiseForJohnny.Api ./build/PractiseForJohnny.Api
+COPY ./src/PractiseForJohnny.Core ./build/PractiseForJohnny.Core
+COPY ./src/PractiseForJohnny.Core ./build/PractiseForJohnny.Core
+
+RUN dotnet publish build/PractiseForJohnny.Api -c Release -o out
+
+FROM registry.cn-guangzhou.aliyuncs.com/supermanxyp/aspnet:7.0
+
+USER root
+
+RUN apt-get update && apt-get install -y \
+    bzip2 make gcc yasm libopencore-amrnb-dev libopencore-amrwb-dev wget 
+
+WORKDIR /app
+COPY --from=build-env /app/out .
+ENTRYPOINT ["dotnet", "PractiseForJohnny.Api.dll"]

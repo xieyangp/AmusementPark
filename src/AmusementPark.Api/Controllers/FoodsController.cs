@@ -1,0 +1,81 @@
+using Mediator.Net;
+using Microsoft.AspNetCore.Mvc;
+using AmusementPark.Message.Commands;
+using AmusementPark.Message.Requests;
+
+namespace AmusementPark.Api.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class FoodsController : ControllerBase
+{
+    private readonly IMediator _mediator;
+
+    public FoodsController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+
+    [HttpPost]
+    [Route("create")]
+    public async Task<IActionResult> CreateFoodAsync([FromBody] CreateFoodCommand command)
+    {
+        var response = await _mediator.SendAsync<CreateFoodCommand, CreateFoodResponse>(command).ConfigureAwait(false);
+
+        return Ok(response);
+    }
+
+    [HttpPost]
+    [Route("update")]
+    public async Task<IActionResult> UpdateFoodAsync([FromBody] UpdateFoodCommand command)
+    {
+        var result = await _mediator.SendAsync<UpdateFoodCommand, UpdateFoodResponse>(command).ConfigureAwait(false);
+
+        return Ok(result);
+    }
+
+    [HttpPost]
+    [Route("delete")]
+    public async Task<IActionResult> DeleteFoodAsync([FromBody] DeleteFoodCommand command)
+    {
+        var result = await _mediator.SendAsync<DeleteFoodCommand, DeleteFoodResponse>(command).ConfigureAwait(false);
+
+        return Ok(result);
+    }
+
+    [HttpPost]
+    [Route("get")]
+    public async Task<IActionResult> GetFoodAsync([FromBody] GetFoodRequest request)
+    {
+        var result = await _mediator.RequestAsync<GetFoodRequest, GetFoodResponse>(request).ConfigureAwait(false);
+
+        return Ok(result);
+    }
+
+    [HttpPost]
+    [Route("delay/create/food")]
+    public async Task<IActionResult> DelayCreateFoodAsync([FromBody] DelayCreateFoodCommand command)
+    {
+        await _mediator.SendAsync(command).ConfigureAwait(false);
+
+        return Ok();
+    }
+
+    [HttpPost]
+    [Route("recurring/update/food")]
+    public async Task<IActionResult> RecurringUpdateFoodAsync([FromBody] RecurringUpdateFoodCommand command)
+    {
+        await _mediator.SendAsync(command).ConfigureAwait(false);
+        
+        return Ok();
+    }
+
+    [HttpPost]
+    [Route("schedule/update/food")]
+    public async Task<IActionResult> ScheduleUpdateFoodAsync([FromBody] ScheduleUpdateFoodCommand command)
+    {
+        await _mediator.SendAsync(command).ConfigureAwait(false);
+
+        return Ok();
+    }
+}

@@ -1,0 +1,33 @@
+using DbUp;
+
+namespace AmusementPark.Core.Dbup;
+
+public class DbUpRunner
+{
+    private readonly string _connectionString;
+
+    public DbUpRunner(string connectionString)
+    {
+        _connectionString = connectionString;
+    }
+
+    public void Run()
+    {
+        EnsureDatabase.For.MySqlDatabase(_connectionString);
+        
+        var upgradeEngine = DeployChanges.To.MySqlDatabase(_connectionString)
+            .WithScriptsEmbeddedInAssembly(typeof(DbUpRunner).Assembly)
+            .WithTransaction()
+            .LogToAutodetectedLog()
+            .LogToConsole()
+            .Build();
+
+        var result = upgradeEngine.PerformUpgrade();
+
+        if (!result.Successful) throw result.Error;
+            
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("Success!");
+        Console.ResetColor();
+    }
+}
